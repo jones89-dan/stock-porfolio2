@@ -6,17 +6,17 @@ import Layout from './layout';
 
 
 
-const Home = props => (
+const Signup = props => (
 
     <Layout>
-    <h1>Home</h1>
+    <h1>Signup</h1>
     </Layout>
 
 )
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Home />,
+    <Signup/>,
     document.body.appendChild(document.createElement('div')),
   )
 })

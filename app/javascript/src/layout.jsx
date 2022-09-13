@@ -14,7 +14,13 @@ const Layout = (props) => {
                   <a className="nav-link" href="/index">Home</a>
                 </li>
                 <li className="nav-item">
-              <a className="nav-link">Logout</a>
+                  <a className="nav-link">Trending</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Portfolio</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">Search</a>
                 </li>
               </ul>
             </div>

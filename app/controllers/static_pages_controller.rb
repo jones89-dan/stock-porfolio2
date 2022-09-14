@@ -4,4 +4,7 @@ class StaticPagesController < ApplicationController
 
   def signup
   end
+
+  def trending
+  end
 end

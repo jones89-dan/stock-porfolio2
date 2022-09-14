@@ -4,8 +4,6 @@ import './home.scss';
 import Layout from './layout';
 
 
-
-
 const Home = props => (
 
     <Layout>

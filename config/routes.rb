@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   # Static Pages
   get 'static_pages/home'
   get '/signup'           => 'static_pages#signup'
-  get '/trending'          => 'static_pages#trending'
+  get '/trending'         => 'static_pages#trending'
 
 end

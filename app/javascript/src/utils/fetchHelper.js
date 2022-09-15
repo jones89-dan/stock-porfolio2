@@ -35,8 +35,8 @@ export function authenticityHeader(options = {}) {
 export function safeCredentials(options = {}) {
   return Object.assign(options, {
     credentials: 'include',
-    mode: 'same-origin',
-    headers: Object.assign((options.headers || {}), authenticityHeader(), jsonHeader()),
+    mode: 'no-cors',
+    headers: Object.assign((options.headers || {}), authenticityHeader(), jsonHeader()), "Access-Control-Allow-Origin": "*",
   });
 }
 

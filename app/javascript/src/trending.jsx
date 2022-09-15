@@ -12,8 +12,12 @@ class Trending extends React.Component {
   }
 
   componentDidMount() {
-
-  }
+    fetch(`https://query1.finance.yahoo.com/v11/finance/quoteSummary/aapl?modules=financialData`)
+      .then(handleErrors)
+      .then(data => {
+        console.log(data)
+      })
+    }
 
   render () {
     return (

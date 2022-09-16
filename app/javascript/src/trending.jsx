@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Layout from './layout';
 import './home.scss';
 import { handleErrors } from 'src/utils/fetchHelper';
-//import { getCurrentUser } from 'src/utils/requests'
+import { getSymbolData } from 'src/utils/requests'
 
 
 class Trending extends React.Component {
@@ -12,11 +12,7 @@ class Trending extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`https://query1.finance.yahoo.com/v11/finance/quoteSummary/aapl?modules=financialData`)
-      .then(handleErrors)
-      .then(data => {
-        console.log(data)
-      })
+    getSymbolData("AAPL")
     }
 
   render () {

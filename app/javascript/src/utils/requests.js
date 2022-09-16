@@ -2,13 +2,13 @@ import $ from 'jquery';
 
 $.ajaxSetup({
   headers: {
-    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+    'Access-Control-Allow-Origin': "*"
   },
   error: function (request, errorMessage) {
     console.log(request, errorMessage);
   }
 });
-
 
 // Authenticate user
 export var authenticate = function (callback) {
@@ -32,4 +32,18 @@ export var  getCurrentUser = function (callback) {
       window.location.replace('/');
     }
   });
+};
+
+export var getSymbolData = function (symbol) {
+  var request = {
+    type: 'GET',
+    url: 'https://query1.finance.yahoo.com/v11/finance/quoteSummary/' + symbol + '?modules=financialData',
+    success: function (response, textStatus) {
+      console.log("success");
+    },
+    error: function (request, textStatus, errorMessage) {
+      console.log(errorMessage);
+    }
+  }
+  $.ajax(request);
 };

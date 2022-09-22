@@ -7,4 +7,7 @@ class StaticPagesController < ApplicationController
 
   def trending
   end
+
+  def portfolio
+  end
 end

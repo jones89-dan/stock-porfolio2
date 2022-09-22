@@ -13,8 +13,6 @@ class Trending extends React.Component {
   }
 
   componentDidMount() {
-    //getSymbolData("AAPL")
-
     const encodedParams = new URLSearchParams();
     encodedParams.append("symbol", "AAPL");
 

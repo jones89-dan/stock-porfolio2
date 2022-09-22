@@ -17,7 +17,7 @@ const Layout = (props) => {
                   <a className="nav-link" href="/trending">Trending</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">Portfolio</a>
+                  <a className="nav-link" href="/portfolio">Portfolio</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link">Search</a>

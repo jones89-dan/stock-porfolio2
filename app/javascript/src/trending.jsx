@@ -4,6 +4,7 @@ import Layout from './layout';
 import './home.scss';
 import { handleErrors } from 'src/utils/fetchHelper';
 import { getSymbolData } from 'src/utils/requests'
+//require 'dotenv/load'
 
 
 class Trending extends React.Component {
@@ -21,7 +22,7 @@ class Trending extends React.Component {
     	method: 'POST',
     	headers: {
     		'content-type': 'application/x-www-form-urlencoded',
-    		'X-RapidAPI-Key': ENV['X_RapidAPI_Key'],
+    		'X-RapidAPI-Key': process.env.X_RapidAPI_Key,
     		'X-RapidAPI-Host': 'yahoo-finance97.p.rapidapi.com'
     	},
     	body: encodedParams

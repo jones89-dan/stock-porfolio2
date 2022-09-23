@@ -10,4 +10,7 @@ class StaticPagesController < ApplicationController
 
   def portfolio
   end
+
+  def search
+  end
 end

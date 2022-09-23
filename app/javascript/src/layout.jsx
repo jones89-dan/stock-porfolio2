@@ -20,7 +20,7 @@ const Layout = (props) => {
                   <a className="nav-link" href="/portfolio">Portfolio</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">Search</a>
+                  <a className="nav-link" href="/search">Search</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/signup">Signup</a>

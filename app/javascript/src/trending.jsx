@@ -10,6 +10,10 @@ import { getSymbolData } from 'src/utils/requests'
 class Trending extends React.Component {
   state = {
     stock: {},
+    symbol: '',
+    data: {},
+    currentPrice: '',
+    error: '',
   }
 
   componentDidMount() {
@@ -28,8 +32,14 @@ class Trending extends React.Component {
 
     fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options)
   	 .then(response => response.json())
-  	  .then(response => console.log(response))
-  	   .catch(err => console.error(err));
+  	 .then(response => console.log(response))
+     .then(response => {
+       console.log(response.data.currentPrice)
+       this.setState({
+         stock: response,
+        })
+      })
+      .catch(err => console.error(err));
     }
 
   render () {

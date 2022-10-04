@@ -10,7 +10,7 @@ import { getSymbolData } from 'src/utils/requests'
 const Trending = () => {
 
     const [stockData, setStockData] = useState([])
-    const [response, setResponse] = useState([])
+    const [apiResponse, setResponse] = useState([])
     const [symbol, setSybmol] = useState([])
     const [data, setData] = useState([])
     const [currentPrice, setCurrentPrice] = useState([])
@@ -36,19 +36,21 @@ const Trending = () => {
 
       fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options)
     	 .then(response => response.json())
-    	 .then(response => console.log(response.data.currentPrice))
-       .then(response => setCurrentPrice([response.data.currentPrice]))
+    	 .then(response => console.log("currentPrice: " + response.data.currentPrice))
+       .then(response => setResponse([response]))
        .catch(err => console.error(err));
     }, []);
 
+    console.log(apiResponse)
+
     return (
       <Layout>
-      <h1>Trending</h1>
-
+        <h1>Trending</h1>
               <div>
-                <p>{currentPrice}</p>
+                {
+                  apiResponse?.map(data => <p>{data} </p>)
+                }
               </div>
-
       </Layout>
     )
 }

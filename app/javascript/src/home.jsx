@@ -7,21 +7,21 @@ import Layout from './layout';
 const Home = props => (
 
     <Layout>
-    <h1>Home</h1>
-    <div id="hero" class="container-fluid">
-      <div class="container-fluid">
+    <div id="hero" className="container-fluid">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto text-center">
             <div className="hero-text">
               <div className="col p-2 d-inline-block text-white">
-                <div className="glass w-auto pt-5 pb-5">
-                  </div>
+                <div className="glass w-auto p-5">
+                 <h1>Stock Portfolio</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </Layout>
 
 )

@@ -29,7 +29,7 @@ const Layout = (props) => {
             </div>
         </div>
       </nav>
-      <div className="no-left container py-3 mb-5">
+      <div>
         {props.children}
       </div>
       <footer className="fixed-bottom p-3 bg-dark">

@@ -37,19 +37,18 @@ const Trending = () => {
       fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options)
     	 .then(response => response.json())
     	 .then(response => console.log(response.data.currentPrice))
-       .then(response => setStockData(response))
+       .then(response => setCurrentPrice([response.data.currentPrice]))
        .catch(err => console.error(err));
     }, []);
 
     return (
       <Layout>
       <h1>Trending</h1>
-          {stockData && stockData.map(data => {
-            return (
-              <div key={data.data}>
-                <p>{data.data}</p>
-              </div> )
-            })}
+
+              <div>
+                <p>{currentPrice}</p>
+              </div>
+
       </Layout>
     )
 }

@@ -1,6 +1,27 @@
 #hero {
   background-image: url(images/hero2.jpg);
   background-size: cover;
+  width: 100%;
   background-position: center;
-  height: 500px;
+  height: 400px;
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 900px;
+}
+
+#hero h2 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: white;
+}
+
+.hero-text {
+  padding-top: 100px;
+  padding-bottom: 100px;
 }

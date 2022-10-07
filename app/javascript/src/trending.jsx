@@ -13,10 +13,13 @@ const Trending = () => {
     const [data, setData] = useState([])
     const [currentPrice, setCurrentPrice] = useState([])
     const [error, setError] = useState([])
+    const [trending, setTrending] = useState([])
+    //const trendingSymbol = "AAPL";
 
-    useEffect(() => {
+
+    const getTrending = function (aSymbol) {
       const encodedParams = new URLSearchParams();
-      encodedParams.append("symbol", "AAPL");
+      encodedParams.append("symbol", aSymbol);
 
       const options = {
       	method: 'POST',
@@ -37,9 +40,16 @@ const Trending = () => {
         } catch (error) {
             console.log("error", error);
         }
-    };
+      };
 
-    fetchData();
+      fetchData();
+    }
+
+    useEffect(() => {
+      const trendingArr = []
+      trendingArr.push(getTrending("AAPL"))
+      trendingArr.push(getTrending("MSFT"))
+      setTrending(trendingArr)
     }, []);
 
     return (
@@ -48,6 +58,8 @@ const Trending = () => {
               <div>
                 {
                   console.log(apiResponse)
+                  trending?.map(data => <p>{data}</p>)
+
                 }
                 <p>Current Price: {apiResponse.currentPrice}</p>
               </div>

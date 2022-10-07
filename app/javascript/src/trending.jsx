@@ -4,21 +4,15 @@ import Layout from './layout';
 import './home.scss';
 import { handleErrors } from 'src/utils/fetchHelper';
 import { getSymbolData } from 'src/utils/requests'
-//require 'dotenv/load'
-
 
 const Trending = () => {
 
     const [stockData, setStockData] = useState([])
-    const [apiResponse, setResponse] = useState([])
+    const [apiResponse, setResponse] = useState({})
     const [symbol, setSybmol] = useState([])
     const [data, setData] = useState([])
     const [currentPrice, setCurrentPrice] = useState([])
     const [error, setError] = useState([])
-
-    const allData = function (response) {
-    setStockData(response.stockData.map(data => data));
-  };
 
     useEffect(() => {
       const encodedParams = new URLSearchParams();
@@ -34,22 +28,28 @@ const Trending = () => {
       	body: encodedParams
       };
 
-      fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options)
-    	 .then(response => response.json())
-    	 .then(response => console.log("currentPrice: " + response.data.currentPrice))
-       .then(response => setResponse([response]))
-       .catch(err => console.error(err));
-    }, []);
+      const fetchData = async() => {
+        try {
+          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+          const json = await response.json();
+          console.log(json);
+          setResponse(json.data);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
 
-    console.log(apiResponse)
+    fetchData();
+    }, []);
 
     return (
       <Layout>
         <h1>Trending</h1>
               <div>
                 {
-                  apiResponse?.map(data => <p>{data} </p>)
+                  console.log(apiResponse)
                 }
+                <p>Current Price: {apiResponse.currentPrice}</p>
               </div>
       </Layout>
     )

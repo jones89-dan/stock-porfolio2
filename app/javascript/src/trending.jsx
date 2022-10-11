@@ -45,14 +45,9 @@ const Trending = () => {
     }
 
     useEffect(() => {
-      getTrending("AAPL")
-      getTrending("MSFT")
-      getTrending("AMZN")
-      getTrending("TSLA")
-      getTrending("GOOG")
-      getTrending("GOOG")
-      getTrending("META")
-      getTrending("NVDA")
+
+      const topARR = ["AAPL", "MSFT", "AMZN", "TSLA", "GOOG", "GOOGL", "META", "NVDA"]
+      topARR.forEach((item, index) => getTrending(item))
 
     }, []);
 

@@ -16,8 +16,6 @@ const Trending = () => {
     const [trending, setTrending] = useState([])
     const trendingArr = []
 
-
-
     const getTrending = function (aSymbol) {
       const encodedParams = new URLSearchParams();
       encodedParams.append("symbol", aSymbol);
@@ -49,6 +47,13 @@ const Trending = () => {
     useEffect(() => {
       getTrending("AAPL")
       getTrending("MSFT")
+      getTrending("AMZN")
+      getTrending("TSLA")
+      getTrending("GOOG")
+      getTrending("GOOG")
+      getTrending("META")
+      getTrending("NVDA")
+
     }, []);
 
     return (
@@ -58,7 +63,6 @@ const Trending = () => {
                 {
                   trending.map(data => <p>{data.shortName} Current Price: {data.currentPrice}</p>)
                 }
-              //  <p>Current Price: {apiResponse.currentPrice}</p>
               </div>
       </Layout>
     )

@@ -14,7 +14,8 @@ const Trending = () => {
     const [currentPrice, setCurrentPrice] = useState([])
     const [error, setError] = useState([])
     const [trending, setTrending] = useState([])
-    //const trendingSymbol = "AAPL";
+    const trendingArr = []
+
 
 
     const getTrending = function (aSymbol) {
@@ -36,20 +37,18 @@ const Trending = () => {
           const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
           const json = await response.json();
           console.log(json);
-          setResponse(json.data);
+          setTrending(trendingArr => [...trendingArr, json.data]);
+
         } catch (error) {
             console.log("error", error);
         }
       };
-
       fetchData();
     }
 
     useEffect(() => {
-      const trendingArr = []
-      trendingArr.push(getTrending("AAPL"))
-      trendingArr.push(getTrending("MSFT"))
-      setTrending(trendingArr)
+      getTrending("AAPL")
+      getTrending("MSFT")
     }, []);
 
     return (
@@ -57,11 +56,9 @@ const Trending = () => {
         <h1>Trending</h1>
               <div>
                 {
-                  console.log(apiResponse)
-                  trending?.map(data => <p>{data}</p>)
-
+                  trending.map(data => <p>{data.shortName} Current Price: {data.currentPrice}</p>)
                 }
-                <p>Current Price: {apiResponse.currentPrice}</p>
+              //  <p>Current Price: {apiResponse.currentPrice}</p>
               </div>
       </Layout>
     )

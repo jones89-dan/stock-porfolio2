@@ -8,6 +8,7 @@ class Search extends React.Component {
   state = {
     symbol: '',
     error: '',
+    response: {},
   }
 
   handleChange = (e) => {
@@ -35,14 +36,24 @@ class Search extends React.Component {
     	body: encodedParams
     };
 
-    fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options)
-  	 .then(response => response.json())
-  	  .then(response => console.log(response))
-  	   .catch(err => console.error(err));
-  }
+      const fetchData = async() => {
+        try {
+          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+          const json = await response.json();
+          console.log(json);
+          this.setState({
+            response: json.data,
+          });
+
+        } catch (error) {
+            console.log("error", error);
+        }
+      }
+      fetchData()
+    }
 
   render () {
-    const { symbol, error } = this.state;
+    const { symbol, error, response } = this.state;
     return (
 
       <Layout>
@@ -52,6 +63,7 @@ class Search extends React.Component {
             <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
             {error && <p className="text-danger mt-2">{error}</p>}
         </form>
+        {console.log(this.response)}
       </Layout>
     )
   }

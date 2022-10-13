@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './home.scss';
 import Layout from './layout';
-
+import $ from 'jquery';
+import './home.scss';
 
 class Search extends React.Component {
   state = {
-    symbol: '',
     error: '',
     response: {},
   }
@@ -17,14 +16,13 @@ class Search extends React.Component {
     })
   }
 
-  searchSymbol = (e, symbol) => {
-    if (e) { e.preventDefault(); }
-    this.setState({
-      error: '',
-    });
+  searchSymbol = (event) => {
+    event.preventDefault();
+    var searchSymbol = $('.a-symbol').val();
+    console.log(searchSymbol)
 
     const encodedParams = new URLSearchParams();
-    encodedParams.append("symbol", symbol);
+    encodedParams.append("symbol", searchSymbol);
 
     const options = {
     	method: 'POST',
@@ -40,7 +38,7 @@ class Search extends React.Component {
         try {
           const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
           const json = await response.json();
-          console.log(json);
+          console.log(json.data);
           this.setState({
             response: json.data,
           });
@@ -54,12 +52,12 @@ class Search extends React.Component {
 
   render () {
     const { symbol, error, response } = this.state;
+    
     return (
-
       <Layout>
       <h1>Search</h1>
         <form onSubmit={this.searchSymbol}>
-            <input name="search" type="text" className="form-control form-control-lg mb-3" placeholder="Search" value={this.symbol} onChange={this.handleChange} required />
+            <input name="search" type="text" className="form-control form-control-lg mb-3 a-symbol" placeholder="Search" required />
             <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
             {error && <p className="text-danger mt-2">{error}</p>}
         </form>

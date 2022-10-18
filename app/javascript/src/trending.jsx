@@ -53,13 +53,31 @@ const Trending = () => {
       <Layout>
         <h1>Trending</h1>
               <div>
-                {trending.map(data => {
-                  return (
-                    <div key={data.symbol}>
-                      <p>{data.symbol} Current Price: {data.currentPrice}</p>
-                    </div>
-                  )
-                })}
+
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Symbol</th>
+                          <th scope="col">Current Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {trending.map(data => {
+                        return (
+                          <div key={data.symbol}>
+                            <tr>
+                              <th scope="row"></th>
+                                <td>{data.symbol}</td>
+                                <td>{data.currentPrice}</td>
+                            </tr>
+                          </div>
+                        )
+                        })}
+                      </tbody>
+                    </table>
+
+
               </div>
       </Layout>
     )

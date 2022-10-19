@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/signup'           => 'static_pages#signup'
   get '/trending'         => 'static_pages#trending'
   get '/portfolio'        => 'static_pages#portfolio'
-  get '/search'           => 'static_pages#search' 
+  get '/search'           => 'static_pages#search'
+  get '/history'          => 'static_pages#history'
 
 end

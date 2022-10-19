@@ -13,4 +13,7 @@ class StaticPagesController < ApplicationController
 
   def search
   end
+
+  def history
+  end
 end

@@ -21,7 +21,7 @@ class Search extends React.Component {
     var searchSymbol = $('.a-symbol').val();
     console.log(searchSymbol)
     $('.a-symbol').val('');
-    
+
     const encodedParams = new URLSearchParams();
     encodedParams.append("symbol", searchSymbol);
 
@@ -57,14 +57,16 @@ class Search extends React.Component {
     return (
       <Layout>
       <h1>Search</h1>
-        <form onSubmit={this.searchSymbol}>
-            <input name="search" type="text" className="form-control form-control-lg mb-3 a-symbol" placeholder="Search" required />
-            <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
-            {error && <p className="text-danger mt-2">{error}</p>}
-        </form>
-        {
-          <p>{response.symbol} Current Price: {response.currentPrice}</p>
-        }
+        <div className="p-5">
+          <form onSubmit={this.searchSymbol}>
+              <input name="search" type="text" className="form-control form-control-lg mb-3 a-symbol" placeholder="Search" required />
+              <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+              {error && <p className="text-danger mt-2">{error}</p>}
+          </form>
+          {
+            <p>{response.symbol} Current Price: {response.currentPrice}</p>
+          }
+        </div>
       </Layout>
     )
   }

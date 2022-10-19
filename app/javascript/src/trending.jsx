@@ -7,11 +7,6 @@ import { getSymbolData } from 'src/utils/requests'
 
 const Trending = () => {
 
-    const [stockData, setStockData] = useState([])
-    const [apiResponse, setResponse] = useState({})
-    const [symbol, setSybmol] = useState([])
-    const [data, setData] = useState([])
-    const [currentPrice, setCurrentPrice] = useState([])
     const [error, setError] = useState([])
     const [trending, setTrending] = useState([])
     const trendingArr = []
@@ -52,8 +47,8 @@ const Trending = () => {
     return (
       <Layout>
         <h1>Trending</h1>
-              <div>
-                    <table className="table">
+              <div className="p-5">
+                    <table className="table table-dark">
                       <thead>
                         <tr>
                           <th scope="col">Symbol</th>

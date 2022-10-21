@@ -2,9 +2,13 @@ import React, {useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
+import moment from 'moment'
+
 
 
 const History = () => {
+
+  const [apiResponse, setResponse] = useState({})
 
   const getHistory = function () {
     const encodedParams = new URLSearchParams();
@@ -27,6 +31,9 @@ const History = () => {
         const response = await fetch('https://yahoo-finance97.p.rapidapi.com/price-customdate', options);
         const json = await response.json();
         console.log(json);
+        setResponse(json);
+        const dateString = moment.unix(response.Date).format("MM/DD/YYYY");
+        console.log(dateString);
 
       } catch (error) {
           console.log("error", error);
@@ -43,6 +50,7 @@ const History = () => {
     <Layout>
     <h1>Histroy</h1>
     </Layout>
+
   )
 
 }

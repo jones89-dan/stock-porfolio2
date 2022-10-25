@@ -4,17 +4,16 @@ import './home.scss';
 import Layout from './layout';
 import moment from 'moment'
 
-
-
 const History = () => {
 
   const [apiResponse, setResponse] = useState({})
+  const historyArr = []
 
   const getHistory = function () {
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", "2022-10-20");
     encodedParams.append("symbol", "AAPL");
-    encodedParams.append("start", "2022-10-18");
+    encodedParams.append("start", "2022-10-19");
 
     const options = {
       method: 'POST',
@@ -32,14 +31,22 @@ const History = () => {
         const json = await response.json();
         console.log(json);
         setResponse(json);
-        const dateString = moment.unix(response.Date).format("MM/DD/YYYY");
-        console.log(dateString);
 
       } catch (error) {
           console.log("error", error);
       }
     };
     fetchData();
+  }
+
+  const formatDate = function (date) {
+    var date = new Date(date*1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    console.log(formattedTime);
+
   }
 
   useEffect(() => {
@@ -49,6 +56,7 @@ const History = () => {
   return (
     <Layout>
     <h1>Histroy</h1>
+    { console.log(apiResponse.Date) }
     </Layout>
 
   )

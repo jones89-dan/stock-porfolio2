@@ -6,7 +6,8 @@ import moment from 'moment'
 
 const History = () => {
 
-  const [apiResponse, setResponse] = useState({})
+  const [apiResponse, setResponse] = useState([])
+  const [history, setHistory] = useState([])
   const historyArr = []
 
   const getHistory = function () {
@@ -29,8 +30,9 @@ const History = () => {
       try {
         const response = await fetch('https://yahoo-finance97.p.rapidapi.com/price-customdate', options);
         const json = await response.json();
-        console.log(json);
-        setResponse(json);
+        console.log(json.data);
+        setResponse(json.data);
+        setHistory(historyArr => [...historyArr, json.data]);
 
       } catch (error) {
           console.log("error", error);
@@ -40,12 +42,8 @@ const History = () => {
   }
 
   const formatDate = function (date) {
-    var date = new Date(date*1000);
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    console.log(formattedTime);
+    const dateString = moment.unix(date).format("MM/DD/YYYY");
+    console.log(dateString);
 
   }
 
@@ -56,7 +54,9 @@ const History = () => {
   return (
     <Layout>
     <h1>Histroy</h1>
-    { console.log(apiResponse.Date) }
+    {apiResponse.map(info => {
+      formatDate(info.Date)
+    })}
     </Layout>
 
   )

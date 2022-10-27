@@ -2,7 +2,8 @@ import React, {useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
-import moment from 'moment'
+import moment from 'moment';
+import Chart from 'chart.js/auto';
 
 const History = () => {
 
@@ -42,13 +43,59 @@ const History = () => {
   }
 
   const formatDate = function (date) {
-    const dateString = moment.unix(date).format("MM/DD/YYYY");
-    console.log(dateString);
+    //const dateString = moment.unix(date).format("MM/DD/YYYY");
+    //var dateFormatted = new Date(date*1000);
+    var a = new Date(date * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var time = date + ' ' + month + ' ' + year;
+    console.log(time);
+  }
 
+  const createChart = function () {
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
   }
 
   useEffect(() => {
     getHistory();
+    createChart();
   }, []);
 
   return (
@@ -57,10 +104,10 @@ const History = () => {
     {apiResponse.map(info => {
       formatDate(info.Date)
     })}
+    <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
 
   )
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {

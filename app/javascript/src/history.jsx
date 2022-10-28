@@ -33,7 +33,10 @@ const History = () => {
         const json = await response.json();
         console.log(json.data);
         setResponse(json.data);
-        setHistory(historyArr => [...historyArr, json.data]);
+        //setHistory(historyArr => [...historyArr, json.data]);
+        const chartData = apiResponse.Open;
+        console.log(chartData);
+        createChart(chartData);
 
       } catch (error) {
           console.log("error", error);
@@ -54,16 +57,17 @@ const History = () => {
     console.log(time);
   }
 
-  const createChart = function () {
+  const createChart = function (data) {
 
     const ctx = document.getElementById('myChart').getContext('2d');
+
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'AAPL',
+                data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -84,18 +88,14 @@ const History = () => {
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+            responsive: true,
         }
     });
   }
 
   useEffect(() => {
     getHistory();
-    createChart();
+    //createChart();
   }, []);
 
   return (

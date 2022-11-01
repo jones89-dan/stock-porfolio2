@@ -34,9 +34,9 @@ const History = () => {
         console.log(json.data);
         setResponse(json.data);
         //setHistory(historyArr => [...historyArr, json.data]);
-        const chartData = apiResponse.Open;
-        console.log(chartData);
-        createChart(chartData);
+        //const chartData = apiResponse.Open;
+        //console.log(apiResponse.Open);
+        //createChart(apiResponse.Open);
 
       } catch (error) {
           console.log("error", error);
@@ -59,6 +59,7 @@ const History = () => {
 
   const createChart = function (data) {
 
+    console.log(data)
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const myChart = new Chart(ctx, {
@@ -67,7 +68,7 @@ const History = () => {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
                 label: 'AAPL',
-                data: data,
+                data: [data],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -102,7 +103,8 @@ const History = () => {
     <Layout>
     <h1>Histroy</h1>
     {apiResponse.map(info => {
-      formatDate(info.Date)
+      formatDate(info.Date);
+      createChart(info.Open);
     })}
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

@@ -4,12 +4,15 @@ import './home.scss';
 import Layout from './layout';
 import moment from 'moment';
 import Chart from 'chart.js/auto';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const History = () => {
 
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const historyArr = []
+  const [startDate, setStartDate] = useState(new Date())
 
   const getHistory = function () {
     const encodedParams = new URLSearchParams();
@@ -72,7 +75,6 @@ const History = () => {
                 data: [[openData, closeData]],
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
-
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -89,6 +91,7 @@ const History = () => {
   useEffect(() => {
     getHistory();
     //createChart();
+
   }, []);
 
   return (
@@ -98,6 +101,7 @@ const History = () => {
       formatDate(info.Date);
       createChart(info.Open, info.Close);
     })}
+    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
 

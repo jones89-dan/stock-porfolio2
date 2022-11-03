@@ -9,16 +9,16 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const History = () => {
 
+  const [startDate, setStartDate] = useState(new Date())
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const historyArr = []
-  const [startDate, setStartDate] = useState(new Date())
 
   const getHistory = function () {
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", "2022-10-20");
     encodedParams.append("symbol", "AAPL");
-    encodedParams.append("start", "2022-10-19");
+    encodedParams.append("start", "2022-10-18");
 
     const options = {
       method: 'POST',
@@ -60,9 +60,8 @@ const History = () => {
     console.log(time);
   }
 
-  const createChart = function (openData, closeData) {
+  const createChart = function (historyArr) {
 
-    console.log(openData)
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const myChart = new Chart(ctx, {
@@ -72,7 +71,10 @@ const History = () => {
             datasets: [{
                 label: 'AAPL',
                 threshold: closeData,
-                data: [[openData, closeData]],
+                data: [historyArr.map( data => {
+                  [data]
+                  })
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                 ],
@@ -99,8 +101,15 @@ const History = () => {
     <h1>Histroy</h1>
     {apiResponse.map(info => {
       formatDate(info.Date);
-      createChart(info.Open, info.Close);
-    })}
+      // create an array to pass to chart?
+      historyArr.push([info.Open, info.Close])
+      //createChart(info.Open, info.Close);
+      })
+    }
+    {
+      console.log(historyArr)
+      //createChart(historyArr)
+    }
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

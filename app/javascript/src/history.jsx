@@ -61,7 +61,7 @@ const History = () => {
   }
 
   const createChart = function (historyArr) {
-
+    const history = historyArr;
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const myChart = new Chart(ctx, {
@@ -70,11 +70,8 @@ const History = () => {
             labels: ['Red'],
             datasets: [{
                 label: 'AAPL',
-                threshold: closeData,
-                data: [historyArr.map( data => {
-                  [data]
-                  })
-                ],
+                //threshold: closeData,
+                data: [history],
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                 ],
@@ -107,8 +104,8 @@ const History = () => {
       })
     }
     {
-      console.log(historyArr)
-      //createChart(historyArr)
+      //console.log(historyArr)
+      createChart(historyArr)
     }
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>

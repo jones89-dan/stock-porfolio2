@@ -13,6 +13,7 @@ const History = () => {
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const historyArr = []
+  const testArr = []
 
   const getHistory = function () {
     const encodedParams = new URLSearchParams();
@@ -36,11 +37,7 @@ const History = () => {
         const json = await response.json();
         console.log(json.data);
         setResponse(json.data);
-        //setHistory(historyArr => [...historyArr, json.data]);
-        //const chartData = apiResponse.Open;
-        //console.log(apiResponse.Open);
-        //createChart(apiResponse.Open);
-
+        //setHistory(historyArr => [...historyArr, apiResponse]);
       } catch (error) {
           console.log("error", error);
       }
@@ -49,8 +46,6 @@ const History = () => {
   }
 
   const formatDate = function (date) {
-    //const dateString = moment.unix(date).format("MM/DD/YYYY");
-    //var dateFormatted = new Date(date*1000);
     var a = new Date(date * 1000);
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var year = a.getFullYear();
@@ -60,10 +55,13 @@ const History = () => {
     console.log(time);
   }
 
-  const createChart = function (historyArr) {
-    const history = historyArr;
-    const ctx = document.getElementById('myChart').getContext('2d');
+  const buildArr = () => {
+    apiResponse.forEach(info => {historyArr.push([info.Open, info.Close])})
+    console.log(historyArr)
+  }
 
+  const createChart = () =>  {
+    const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -71,12 +69,14 @@ const History = () => {
             datasets: [{
                 label: 'AAPL',
                 //threshold: closeData,
-                data: [history],
+                data: historyArr,//[history],
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 0.2)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 0.2)',
                 ],
                 borderWidth: 1
             }]
@@ -89,28 +89,16 @@ const History = () => {
 
   useEffect(() => {
     getHistory();
-    //createChart();
-
+    buildArr();
   }, []);
 
   return (
     <Layout>
     <h1>Histroy</h1>
-    {apiResponse.map(info => {
-      formatDate(info.Date);
-      // create an array to pass to chart?
-      historyArr.push([info.Open, info.Close])
-      //createChart(info.Open, info.Close);
-      })
-    }
-    {
-      //console.log(historyArr)
-      createChart(historyArr)
-    }
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
+    { createChart() }
     </Layout>
-
   )
 }
 

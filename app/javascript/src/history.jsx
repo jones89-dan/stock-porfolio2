@@ -35,9 +35,16 @@ const History = () => {
       try {
         const response = await fetch('https://yahoo-finance97.p.rapidapi.com/price-customdate', options);
         const json = await response.json();
-        console.log(json.data);
         setResponse(json.data);
-        //setHistory(historyArr => [...historyArr, apiResponse]);
+
+        // Loop through array of object and collect open/close data
+        for (let i = 0; i < json.data.length; i++) {
+            if (!json.data[i].hasOwnProperty('Open')) {
+        continue;
+        }
+          setHistory(json.data[i].Open);
+        }
+
       } catch (error) {
           console.log("error", error);
       }
@@ -56,11 +63,11 @@ const History = () => {
   }
 
   const buildArr = () => {
-    apiResponse.forEach(info => {historyArr.push([info.Open, info.Close])})
-    console.log(historyArr)
+    apiResponse.map(info => {setHistory([info.Open, info.Close])})
   }
 
   const createChart = () =>  {
+    //console.log(historyArr)
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
@@ -69,7 +76,7 @@ const History = () => {
             datasets: [{
                 label: 'AAPL',
                 //threshold: closeData,
-                data: historyArr,//[history],
+                data: [], //[history]
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 0.2)',
@@ -89,15 +96,15 @@ const History = () => {
 
   useEffect(() => {
     getHistory();
-    buildArr();
+
   }, []);
 
   return (
     <Layout>
     <h1>Histroy</h1>
+    { console.log(history) }
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
-    { createChart() }
     </Layout>
   )
 }

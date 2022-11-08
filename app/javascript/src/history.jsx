@@ -12,10 +12,10 @@ const History = () => {
   const [startDate, setStartDate] = useState(new Date())
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
-  const historyArr = []
   const testArr = []
 
   const getHistory = function () {
+    const historyArr = [];
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", "2022-10-20");
     encodedParams.append("symbol", "AAPL");
@@ -42,14 +42,42 @@ const History = () => {
             if (!json.data[i].hasOwnProperty('Open')) {
         continue;
         }
-          setHistory(json.data[i].Open);
+          historyArr.push([json.data[i].Open, json.data[i].Close]);
         }
 
       } catch (error) {
           console.log("error", error);
       }
+
+      console.log(historyArr);
+
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Red', 'Green'],
+              datasets: [{
+                  label: 'AAPL',
+                  data: historyArr, //[history]
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(0,128,0)',
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(0,128,0)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              responsive: true,
+          }
+      });
+
     };
     fetchData();
+
   }
 
   const formatDate = function (date) {
@@ -66,43 +94,13 @@ const History = () => {
     apiResponse.map(info => {setHistory([info.Open, info.Close])})
   }
 
-  const createChart = () =>  {
-    //console.log(historyArr)
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red'],
-            datasets: [{
-                label: 'AAPL',
-                //threshold: closeData,
-                data: [], //[history]
-                backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 0.2)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-        }
-    });
-  }
-
   useEffect(() => {
     getHistory();
-
   }, []);
 
   return (
     <Layout>
     <h1>Histroy</h1>
-    { console.log(history) }
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

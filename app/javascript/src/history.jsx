@@ -17,10 +17,11 @@ const History = () => {
   const getHistory = function () {
     const historyArr = [];
     const colorArr = [];
+    const dateArr = [];
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", "2022-10-20");
     encodedParams.append("symbol", "AAPL");
-    encodedParams.append("start", "2022-10-18");
+    encodedParams.append("start", "2022-10-13");
 
     const options = {
       method: 'POST',
@@ -38,12 +39,14 @@ const History = () => {
         const json = await response.json();
         setResponse(json.data);
 
+        console.log(json.data)
         // Loop through array of object and collect open/close data
         for (let i = 0; i < json.data.length; i++) {
             if (!json.data[i].hasOwnProperty('Open')) {
         continue;
         }
           historyArr.push([json.data[i].Open, json.data[i].Close]);
+          dateArr.push(json.data[i].Date)
 
           if(json.data[i].Open > json.data[i].Close) {
             colorArr.push('rgba(192, 57, 42)');
@@ -58,12 +61,13 @@ const History = () => {
 
       console.log(historyArr);
       console.log(colorArr);
+      console.log(dateArr);
 
       const ctx = document.getElementById('myChart').getContext('2d');
       const myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-              labels: ['Red', 'Green'],
+              labels: dateArr,
               datasets: [{
                   barPercentage: 1.0,
                   categoryPercentage: 1.0,
@@ -76,6 +80,10 @@ const History = () => {
           },
           options: {
               responsive: true,
+              plugins: {
+                legend: {
+                  display: false,
+                }}
           }
       });
 
@@ -89,7 +97,7 @@ const History = () => {
     var year = a.getFullYear();
     var month = months[a.getMonth()];
     var date = a.getDate();
-    var time = date + ' ' + month + ' ' + year;
+    var time = date + ' ' + month;
     console.log(time);
   }
 

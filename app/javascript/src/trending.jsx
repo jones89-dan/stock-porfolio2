@@ -59,7 +59,7 @@ const Trending = () => {
                         {trending.map(data => {
                           return (
                             <tr>
-                              <th scope="row" key={data.symbol}><a href="./history">{data.symbol}</a></th>
+                              <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
                               <td scope="col">${data.currentPrice}</td>
                             </tr>
                           )

@@ -13,15 +13,18 @@ const History = () => {
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const testArr = []
+  const querySybmol = location.search.substring(1);
 
   const getHistory = function () {
+
+    console.log(querySybmol);
     const historyArr = [];
     const colorArr = [];
     const dateArr = [];
     const encodedParams = new URLSearchParams();
-    encodedParams.append("end", "2022-10-20");
-    encodedParams.append("symbol", "AAPL");
-    encodedParams.append("start", "2022-10-13");
+    encodedParams.append("end", "2022-11-08");
+    encodedParams.append("symbol", querySybmol);
+    encodedParams.append("start", "2022-10-19");
 
     const options = {
       method: 'POST',
@@ -41,7 +44,7 @@ const History = () => {
 
         console.log(json.data)
         // Loop through array of object and collect open/close data
-        for (let i = 0; i < json.data.length; i++) {
+        for (let i = 0; i <= json.data.length; i++) {
             if (!json.data[i].hasOwnProperty('Open')) {
         continue;
         }
@@ -71,7 +74,7 @@ const History = () => {
               datasets: [{
                   barPercentage: 1.0,
                   categoryPercentage: 1.0,
-                  label: 'AAPL',
+                  label: querySybmol,
                   data: historyArr,
                   backgroundColor: colorArr,
                   borderColor: colorArr,
@@ -111,7 +114,7 @@ const History = () => {
 
   return (
     <Layout>
-    <h1>History</h1>
+    <h1>History {querySybmol}</h1>
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

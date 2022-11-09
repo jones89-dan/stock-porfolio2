@@ -16,6 +16,7 @@ const History = () => {
 
   const getHistory = function () {
     const historyArr = [];
+    const colorArr = [];
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", "2022-10-20");
     encodedParams.append("symbol", "AAPL");
@@ -43,6 +44,12 @@ const History = () => {
         continue;
         }
           historyArr.push([json.data[i].Open, json.data[i].Close]);
+
+          if(json.data[i].Open > json.data[i].Close) {
+            colorArr.push('rgba(192, 57, 42)');
+          } else {
+            colorArr.push('rgba(0,128,0,1)');
+          }
         }
 
       } catch (error) {
@@ -50,6 +57,7 @@ const History = () => {
       }
 
       console.log(historyArr);
+      console.log(colorArr);
 
       const ctx = document.getElementById('myChart').getContext('2d');
       const myChart = new Chart(ctx, {
@@ -60,15 +68,9 @@ const History = () => {
                   barPercentage: 1.0,
                   categoryPercentage: 1.0,
                   label: 'AAPL',
-                  data: historyArr, //[history]
-                  backgroundColor: [
-                      'rgba(255, 99, 132, 1)',
-                      'rgba(0,128,0)',
-                  ],
-                  borderColor: [
-                      'rgba(255, 99, 132, 1)',
-                      'rgba(0,128,0)',
-                  ],
+                  data: historyArr,
+                  backgroundColor: colorArr,
+                  borderColor: colorArr,
                   borderWidth: 1
               }]
           },
@@ -79,7 +81,6 @@ const History = () => {
 
     };
     fetchData();
-
   }
 
   const formatDate = function (date) {
@@ -102,7 +103,7 @@ const History = () => {
 
   return (
     <Layout>
-    <h1>Histroy</h1>
+    <h1>History</h1>
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

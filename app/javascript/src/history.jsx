@@ -57,6 +57,8 @@ const History = () => {
           data: {
               labels: ['Red', 'Green'],
               datasets: [{
+                  barPercentage: 1.0,
+                  categoryPercentage: 1.0,
                   label: 'AAPL',
                   data: historyArr, //[history]
                   backgroundColor: [

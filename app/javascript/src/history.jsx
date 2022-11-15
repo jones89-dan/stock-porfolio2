@@ -15,16 +15,48 @@ const History = () => {
   const testArr = []
   const querySybmol = location.search.substring(1);
 
-  const getHistory = function () {
+  const getHistory = function (startDate) {
+
+    // format date for api request
+    var currentDate = new Date();
+    const yyyy = currentDate.getFullYear();
+    let mm = currentDate.getMonth() + 1; // Months start at 0!
+    let dd = currentDate.getDate();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    const formattedToday = yyyy + '-' + mm + '-' + (dd - 1);
+
+    console.log(formattedToday)
+
+    if (startDate == undefined) {
+      const today = new Date()
+      const lastWeek = new Date(today)
+
+      lastWeek.setDate(lastWeek.getDate() - 7)
+      console.log(lastWeek.toDateString())
+
+      const yyyy = lastWeek.getFullYear();
+      let mm = lastWeek.getMonth() + 1; // Months start at 0!
+      let dd = lastWeek.getDate();
+
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+
+      startDate = yyyy + '-' + mm + '-' + (dd - 1);
+    }
+
+
 
     console.log(querySybmol);
     const historyArr = [];
     const colorArr = [];
     const dateArr = [];
     const encodedParams = new URLSearchParams();
-    encodedParams.append("end", "2022-11-08");
+    encodedParams.append("end", formattedToday);
     encodedParams.append("symbol", querySybmol);
-    encodedParams.append("start", "2022-10-19");
+    encodedParams.append("start", startDate);
 
     const options = {
       method: 'POST',
@@ -116,6 +148,7 @@ const History = () => {
     <Layout>
     <h1>History {querySybmol}</h1>
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+    {console.log(startDate)}
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )

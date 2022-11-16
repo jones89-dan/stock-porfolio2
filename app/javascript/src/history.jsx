@@ -15,46 +15,41 @@ const History = () => {
   const testArr = []
   const querySybmol = location.search.substring(1);
 
-  const getHistory = function (startDate) {
+  const formatDate = (aDate) => {
 
-    // format date for api request
-    var currentDate = new Date();
-    const yyyy = currentDate.getFullYear();
-    let mm = currentDate.getMonth() + 1; // Months start at 0!
-    let dd = currentDate.getDate();
+    const yyyy = aDate.getFullYear();
+    let mm = aDate.getMonth() + 1; // Months start at 0!
+    let dd = aDate.getDate();
 
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
 
-    const formattedToday = yyyy + '-' + mm + '-' + (dd - 1);
+    const formattedDate = yyyy + '-' + mm + '-' + (dd - 1);
+    return formattedDate;
+  }
 
-    console.log(formattedToday)
+
+  const getHistory = function (startDate) {
+
+    // format date for api request
+    var currentDate = new Date();
+    const endDate = formatDate(currentDate)
+    console.log(endDate)
 
     if (startDate == undefined) {
       const today = new Date()
       const lastWeek = new Date(today)
-
       lastWeek.setDate(lastWeek.getDate() - 7)
-      console.log(lastWeek.toDateString())
-
-      const yyyy = lastWeek.getFullYear();
-      let mm = lastWeek.getMonth() + 1; // Months start at 0!
-      let dd = lastWeek.getDate();
-
-      if (dd < 10) dd = '0' + dd;
-      if (mm < 10) mm = '0' + mm;
-
-      startDate = yyyy + '-' + mm + '-' + (dd - 1);
+      startDate = formatDate(lastWeek);
+      console.log(startDate)
     }
-
-
 
     console.log(querySybmol);
     const historyArr = [];
     const colorArr = [];
     const dateArr = [];
     const encodedParams = new URLSearchParams();
-    encodedParams.append("end", formattedToday);
+    encodedParams.append("end", endDate);
     encodedParams.append("symbol", querySybmol);
     encodedParams.append("start", startDate);
 
@@ -124,16 +119,6 @@ const History = () => {
 
     };
     fetchData();
-  }
-
-  const formatDate = function (date) {
-    var a = new Date(date * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var time = date + ' ' + month;
-    console.log(time);
   }
 
   const buildArr = () => {

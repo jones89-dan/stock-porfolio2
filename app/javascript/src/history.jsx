@@ -15,8 +15,8 @@ const History = () => {
   const testArr = []
   const querySybmol = location.search.substring(1);
 
+  // function to format date string
   const formatDate = (aDate) => {
-
     const yyyy = aDate.getFullYear();
     let mm = aDate.getMonth() + 1; // Months start at 0!
     let dd = aDate.getDate();
@@ -28,20 +28,28 @@ const History = () => {
     return formattedDate;
   }
 
+  const updateDate = (e) => {
+    setStartDate(e.value)
+    console.log(e.value)
 
-  const getHistory = function (startDate) {
+  }
 
+
+  const getHistory = function (startDateVar) {
     // format date for api request
+
     var currentDate = new Date();
     const endDate = formatDate(currentDate)
     console.log(endDate)
 
-    if (startDate == undefined) {
+    if (startDateVar == undefined) {
       const today = new Date()
       const lastWeek = new Date(today)
       lastWeek.setDate(lastWeek.getDate() - 7)
-      startDate = formatDate(lastWeek);
-      console.log(startDate)
+      startDateVar = formatDate(lastWeek);
+      console.log(startDateVar)
+    } else {
+      startDateVar = formatDate(startDateVar)
     }
 
     console.log(querySybmol);
@@ -51,7 +59,7 @@ const History = () => {
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", endDate);
     encodedParams.append("symbol", querySybmol);
-    encodedParams.append("start", startDate);
+    encodedParams.append("start", startDateVar);
 
     const options = {
       method: 'POST',
@@ -121,10 +129,6 @@ const History = () => {
     fetchData();
   }
 
-  const buildArr = () => {
-    apiResponse.map(info => {setHistory([info.Open, info.Close])})
-  }
-
   useEffect(() => {
     getHistory();
   }, []);
@@ -132,8 +136,8 @@ const History = () => {
   return (
     <Layout>
     <h1>History {querySybmol}</h1>
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-    {console.log(startDate)}
+    <DatePicker select="date" value={startDate} onChange={updateDate} />
+
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )

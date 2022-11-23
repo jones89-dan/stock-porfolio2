@@ -83,7 +83,7 @@ const History = () => {
             if (!json.data[i].hasOwnProperty('Open')) {
         continue;
         }
-          historyArr.push([json.data[i].Open, json.data[i].Close]);
+          historyArr.push([json.data[i].Open.toFixed(2), json.data[i].Close.toFixed(2)]);
           dateArr.push(json.data[i].Date)
 
           if(json.data[i].Open > json.data[i].Close) {

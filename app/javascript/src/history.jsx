@@ -4,16 +4,15 @@ import './home.scss';
 import Layout from './layout';
 import moment from 'moment';
 import Chart from 'chart.js/auto';
-//import DatePicker from "react-datepicker";
-//import "react-datepicker/dist/react-datepicker.css";
-import 'react-dates/initialize';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+//import 'react-dates/initialize';
+//import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 const History = () => {
 
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
+  const [startDate, setStartDate] = useState(new Date())
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const testArr = []
@@ -136,15 +135,7 @@ const History = () => {
   return (
     <Layout>
     <h1>History {querySybmol}</h1>
-    <DateRangePicker
-      startDate={startDate} // momentPropTypes.momentObj or null,
-      startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-      endDate={endDate} // momentPropTypes.momentObj or null,
-      endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-      onDatesChange={({ startDate, endDate })} // PropTypes.func.isRequired,
-      focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-      onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-    />
+     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
 
     <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>

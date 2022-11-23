@@ -63,7 +63,7 @@ class Search extends React.Component {
               <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
               {error && <p className="text-danger mt-2">{error}</p>}
           </form>
-          { response ? <p>{response.symbol} Current Price: {response.currentPrice}</p>
+          { response ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
             : <p></p>
           }
         </div>

@@ -4,6 +4,7 @@ import './home.scss';
 import Layout from './layout';
 import moment from 'moment';
 import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 //import 'react-dates/initialize';
@@ -112,9 +113,14 @@ const History = () => {
                   data: historyArr,
                   backgroundColor: colorArr,
                   borderColor: colorArr,
-                  borderWidth: 1
+                  borderWidth: 1,
+                  datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                  }
               }]
           },
+          plugins: [ChartDataLabels],
           options: {
               responsive: true,
               plugins: {
@@ -137,7 +143,7 @@ const History = () => {
     <h1>History {querySybmol}</h1>
      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
 
-    <canvas id="myChart" style={{width:"400", height:"400"}}></canvas>
+    <canvas className="p-5" id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )
 }

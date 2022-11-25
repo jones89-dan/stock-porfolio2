@@ -34,7 +34,6 @@ const History = () => {
 
   const onDatesChange = ({ startDate}) => setStartDate({ startDate})
 
-
   const getHistory = function (startDateVar) {
     // format date for api request
 
@@ -134,6 +133,12 @@ const History = () => {
     fetchData();
   }
 
+  const getData = (event, aDate) => {
+    aDate = formatDate(aDate);
+    console.log(aDate);
+
+  }
+
   useEffect(() => {
     getHistory();
   }, []);
@@ -142,7 +147,7 @@ const History = () => {
     <Layout>
     <h1>History {querySybmol}</h1>
      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-
+     <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => getData(event, startDate)}>Search</button>
     <canvas className="p-5" id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )

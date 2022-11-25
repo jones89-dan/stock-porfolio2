@@ -14,6 +14,7 @@ import 'react-dates/lib/css/_datepicker.css';
 const History = () => {
 
   const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
   const testArr = []
@@ -32,11 +33,8 @@ const History = () => {
     return formattedDate;
   }
 
-  const onDatesChange = ({ startDate}) => setStartDate({ startDate})
-
   const getHistory = function (startDateVar) {
     // format date for api request
-
     var currentDate = new Date();
     const endDate = formatDate(currentDate)
     console.log(endDate)
@@ -133,9 +131,11 @@ const History = () => {
     fetchData();
   }
 
-  const getData = (event, aDate) => {
-    aDate = formatDate(aDate);
-    console.log(aDate);
+  const getData = (event, start, end) => {
+    start = formatDate(start);
+    end = formatDate(end)
+
+    console.log(start + " to " + end);
 
   }
 
@@ -145,10 +145,26 @@ const History = () => {
 
   return (
     <Layout>
-    <h1>History {querySybmol}</h1>
-     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-     <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => getData(event, startDate)}>Search</button>
-    <canvas className="p-5" id="myChart" style={{width:"400", height:"400"}}></canvas>
+      <h1>History {querySybmol}</h1>
+      <h3>Search A Date Range</h3>
+        <div class="d-flex flex-row">
+          <div class="p-2">
+            <p>Start Date:  </p>
+          </div>
+          <div class="p-2">
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+          </div>
+          <div class="p-2">
+            <p>End Date:</p>
+          </div>
+          <div class="p-2">
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)}/>
+          </div>
+          <div class="p-2">
+            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => getData(event, startDate, endDate)}>Search</button>
+          </div>
+        </div>
+      <canvas className="p-5" id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )
 }

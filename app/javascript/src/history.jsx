@@ -33,11 +33,13 @@ const History = () => {
     return formattedDate;
   }
 
-  const getHistory = function (startDateVar) {
-    // format date for api request
-    var currentDate = new Date();
-    const endDate = formatDate(currentDate)
-    console.log(endDate)
+  const getHistory = function (startDateVar, endDateVar) {
+    // format and set dates for api request
+    if (endDateVar == undefined){
+      var currentDate = new Date();
+      endDateVar = formatDate(currentDate)
+      console.log(endDateVar)
+    }
 
     if (startDateVar == undefined) {
       const today = new Date()
@@ -45,8 +47,6 @@ const History = () => {
       lastWeek.setDate(lastWeek.getDate() - 7)
       startDateVar = formatDate(lastWeek);
       console.log(startDateVar)
-    } else {
-      startDateVar = formatDate(startDateVar)
     }
 
     console.log(querySybmol);
@@ -54,7 +54,7 @@ const History = () => {
     const colorArr = [];
     const dateArr = [];
     const encodedParams = new URLSearchParams();
-    encodedParams.append("end", endDate);
+    encodedParams.append("end", endDateVar);
     encodedParams.append("symbol", querySybmol);
     encodedParams.append("start", startDateVar);
 
@@ -134,9 +134,7 @@ const History = () => {
   const getData = (event, start, end) => {
     start = formatDate(start);
     end = formatDate(end)
-
     console.log(start + " to " + end);
-
   }
 
   useEffect(() => {
@@ -147,20 +145,20 @@ const History = () => {
     <Layout>
       <h1>History {querySybmol}</h1>
       <h3>Search A Date Range</h3>
-        <div class="d-flex flex-row">
-          <div class="p-2">
+        <div className="d-flex flex-row">
+          <div className="p-2">
             <p>Start Date:  </p>
           </div>
-          <div class="p-2">
+          <div className="p-2">
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
           </div>
-          <div class="p-2">
+          <div className="p-2">
             <p>End Date:</p>
           </div>
-          <div class="p-2">
+          <div className="p-2">
             <DatePicker selected={endDate} onChange={(date) => setEndDate(date)}/>
           </div>
-          <div class="p-2">
+          <div className="p-2">
             <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => getData(event, startDate, endDate)}>Search</button>
           </div>
         </div>

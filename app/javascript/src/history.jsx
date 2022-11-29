@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 //import 'react-dates/initialize';
 //import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
+import $ from 'jquery';
 
 const History = () => {
 
@@ -98,6 +99,13 @@ const History = () => {
       console.log(colorArr);
       console.log(dateArr);
 
+      // destory the chart if it exists
+      let chartStatus = Chart.getChart("myChart"); // <canvas> id
+      if (chartStatus != undefined) {
+        chartStatus.destroy();
+      }
+
+      // build the chart
       const ctx = document.getElementById('myChart').getContext('2d');
       const myChart = new Chart(ctx, {
           type: 'bar',
@@ -131,10 +139,12 @@ const History = () => {
     fetchData();
   }
 
-  const getData = (event, start, end) => {
+  // run custom search with date range
+  const customSearch = (event, start, end) => {
     start = formatDate(start);
     end = formatDate(end)
     console.log(start + " to " + end);
+    getHistory(start, end);
   }
 
   useEffect(() => {
@@ -159,10 +169,10 @@ const History = () => {
             <DatePicker selected={endDate} onChange={(date) => setEndDate(date)}/>
           </div>
           <div className="p-2">
-            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => getData(event, startDate, endDate)}>Search</button>
+            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => customSearch(event, startDate, endDate)}>Search</button>
           </div>
         </div>
-      <canvas className="p-5" id="myChart" style={{width:"400", height:"400"}}></canvas>
+      <canvas className="p-5 thisChart" id="myChart" style={{width:"400", height:"400"}}></canvas>
     </Layout>
   )
 }

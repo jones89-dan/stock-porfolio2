@@ -18,6 +18,7 @@ const History = () => {
   const [endDate, setEndDate] = useState(new Date())
   const [apiResponse, setResponse] = useState([])
   const [history, setHistory] = useState([])
+  const [errorMessage, setErrorMessage] = useState("")
   const testArr = []
   const querySybmol = location.search.substring(1);
 
@@ -141,10 +142,15 @@ const History = () => {
 
   // run custom search with date range
   const customSearch = (event, start, end) => {
-    start = formatDate(start);
-    end = formatDate(end)
-    console.log(start + " to " + end);
-    getHistory(start, end);
+    if (start < end){
+      setErrorMessage("")
+      start = formatDate(start);
+      end = formatDate(end);
+      console.log(start + " to " + end);
+      getHistory(start, end);
+    } else {
+      setErrorMessage("Start date must be before end date.")
+    }
   }
 
   useEffect(() => {
@@ -154,7 +160,14 @@ const History = () => {
   return (
     <Layout>
       <h1>History {querySybmol}</h1>
-      <h3>Search A Date Range</h3>
+        <div className="d-flex flex-row">
+          <div>
+            <h3>Search A Date Range</h3>
+          </div>
+          <div className="p-2 mb-0">
+            <p style={{color: 'red'}}>{errorMessage}</p>
+          </div>
+        </div>
         <div className="d-flex flex-row">
           <div className="p-2">
             <p>Start Date:  </p>

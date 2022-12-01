@@ -135,7 +135,6 @@ const History = () => {
                 }}
           }
       });
-
     };
     fetchData();
   }
@@ -146,7 +145,6 @@ const History = () => {
       setErrorMessage("")
       start = formatDate(start);
       end = formatDate(end);
-      console.log(start + " to " + end);
       getHistory(start, end);
     } else {
       setErrorMessage("Start date must be before end date.")

@@ -157,33 +157,35 @@ const History = () => {
 
   return (
     <Layout>
-      <h1>History {querySybmol}</h1>
-        <div className="d-flex flex-row">
-          <div>
-            <h3>Search A Date Range</h3>
+      <div className="text-white">
+        <h1>History {querySybmol}</h1>
+          <div className="d-flex flex-row">
+            <div>
+              <h3>Search A Date Range</h3>
+            </div>
+            <div className="p-2 mb-0">
+              <p style={{color: 'red'}}>{errorMessage}</p>
+            </div>
           </div>
-          <div className="p-2 mb-0">
-            <p style={{color: 'red'}}>{errorMessage}</p>
+          <div className="d-flex flex-row">
+            <div className="p-2">
+              <p>Start Date:  </p>
+            </div>
+            <div className="p-2">
+              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            </div>
+            <div className="p-2">
+              <p>End Date:</p>
+            </div>
+            <div className="p-2">
+              <DatePicker selected={endDate} onChange={(date) => setEndDate(date)}/>
+            </div>
+            <div className="p-2">
+              <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => customSearch(event, startDate, endDate)}>Search</button>
+            </div>
           </div>
-        </div>
-        <div className="d-flex flex-row">
-          <div className="p-2">
-            <p>Start Date:  </p>
-          </div>
-          <div className="p-2">
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-          </div>
-          <div className="p-2">
-            <p>End Date:</p>
-          </div>
-          <div className="p-2">
-            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)}/>
-          </div>
-          <div className="p-2">
-            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => customSearch(event, startDate, endDate)}>Search</button>
-          </div>
-        </div>
-      <canvas className="p-5 thisChart" id="myChart" style={{width:"400", height:"400"}}></canvas>
+        <canvas className="p-5 thisChart" id="myChart" style={{width:"400", height:"400"}}></canvas>
+      </div>
     </Layout>
   )
 }

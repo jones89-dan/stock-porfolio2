@@ -56,16 +56,18 @@ class Search extends React.Component {
 
     return (
       <Layout>
-      <h1>Search</h1>
-        <div className="p-5">
-          <form onSubmit={this.searchSymbol}>
-              <input name="search" type="text" className="form-control form-control-lg mb-3 a-symbol" placeholder="Search" required />
-              <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
-              {error && <p className="text-danger mt-2">{error}</p>}
-          </form>
-          { response ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
-            : <p></p>
-          }
+      <div className="text-white">
+        <h1>Search</h1>
+          <div className="p-5">
+            <form onSubmit={this.searchSymbol}>
+                <input name="search" type="text" className="form-control form-control-lg mb-3 a-symbol" placeholder="Search" required />
+                <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+                {error && <p className="text-danger mt-2">{error}</p>}
+            </form>
+            { response ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+              : <p></p>
+            }
+          </div>
         </div>
       </Layout>
     )

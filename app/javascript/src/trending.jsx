@@ -46,26 +46,28 @@ const Trending = () => {
 
     return (
       <Layout>
-        <h1>Trending</h1>
-              <div className="p-5">
-                    <table className="table table-dark">
-                      <thead>
-                        <tr>
-                          <th scope="col">Symbol</th>
-                          <th scope="col">Current Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {trending.map(data => {
-                          return (
-                            <tr>
-                              <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                              <td scope="col">${data.currentPrice}</td>
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </table>
+        <div className="text-white">
+          <h1>Trending</h1>
+                <div className="p-5">
+                      <table className="table table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Current Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {trending.map(data => {
+                            return (
+                              <tr>
+                                <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
+                                <td scope="col">${data.currentPrice}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                </div>
               </div>
       </Layout>
     )

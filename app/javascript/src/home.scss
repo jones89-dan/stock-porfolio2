@@ -37,3 +37,18 @@ body {
 .type-writer {
   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
 }
+
+@keyframes blink {
+   from{
+       opacity: 0%;
+    }
+    to{
+        opacity: 100%;
+     }
+}
+.type-writer::after{
+    content: "|";
+animation: blink 1s infinite;
+}
+.type-writer > span{
+}

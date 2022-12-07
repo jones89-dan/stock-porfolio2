@@ -6,7 +6,7 @@ import './home.scss';
 
 class Search extends React.Component {
   state = {
-    error: '',
+    error: 'No results.',
     response: {},
   }
 
@@ -42,6 +42,7 @@ class Search extends React.Component {
           console.log(json.data);
           this.setState({
             response: json.data,
+            error: "No results."
           });
 
         } catch (error) {
@@ -49,6 +50,12 @@ class Search extends React.Component {
         }
       }
       fetchData()
+    }
+
+    componentDidMount = () => {
+      this.setState({
+          error: ""
+        })
     }
 
   render () {
@@ -62,12 +69,11 @@ class Search extends React.Component {
             <form onSubmit={this.searchSymbol}>
                 <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
                 <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
-                {error && <p className="text-danger mt-2">{error}</p>}
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-5 output-text">
-                { response ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
-                  : <p></p>
+                { response.preMarketPrice ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                  : <p className="text-danger mt-2">{error}</p>
                 }
               </div>
             </div>

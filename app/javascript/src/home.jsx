@@ -8,7 +8,8 @@ const Home = () => {
   const textList = [
     "Welcome to the financial stock app.",
     "See stock data in real time.",
-    "View historical trends and track stocks you have invested in."
+    "View historical data.",
+    "Track stocks you've invested in."
   ];
 
   const [text, setText] = useState("")

@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
 
-
 const Portfolio = props => (
 
     <Layout>
-    <h1>Portfolio</h1>
+      <div className="text-white">
+        <h1>Portfolio</h1>
+      </div>
     </Layout>
 
 )

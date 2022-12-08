@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
 
-const Portfolio = props => (
+const Portfolio = () => {
 
+  const [apiResponse, setResponse] = useState([])
+  const querySybmol = location.search.substring(1);
+
+  const getStock = function () {
+
+    const encodedParams = new URLSearchParams();
+    encodedParams.append("symbol", querySybmol);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': process.env.X_RapidAPI_Key,
+        'X-RapidAPI-Host': 'yahoo-finance97.p.rapidapi.com'
+      },
+      body: encodedParams
+    };
+
+    const fetchData = async() => {
+      try {
+        const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+        const json = await response.json();
+        setResponse(json.data);
+
+        console.log(json.data)
+      } catch (error) {
+          console.log("error", error);
+      }
+    };
+    fetchData();
+  }
+
+  return (
     <Layout>
       <div className="text-white">
         <h1>Portfolio</h1>
@@ -26,8 +59,8 @@ const Portfolio = props => (
           </div>
       </div>
     </Layout>
-
-)
+  )
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

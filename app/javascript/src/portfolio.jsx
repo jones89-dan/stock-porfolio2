@@ -6,6 +6,7 @@ import Layout from './layout';
 const Portfolio = () => {
 
   const [apiResponse, setResponse] = useState([])
+  const [search, addSearch] = useState([])
   const querySybmol = location.search.substring(1);
 
   const getStock = function () {
@@ -37,10 +38,21 @@ const Portfolio = () => {
     fetchData();
   }
 
+  const addToPortfolio = (event) => {
+      event.preventDefault();
+      addSearch(<input name="search" type="text" className="form-control form-control-lg mt-3 mr-5 ml-5 a-symbol" placeholder="Search" required />)
+  }
+
   return (
     <Layout>
       <div className="text-white">
         <h1>Portfolio</h1>
+          <div className="p-5 text-center search-form">
+            <form onSubmit={addToPortfolio}>
+                <button type="submit" className="btn btn-danger btn-block btn-lg">Add to Portfolio</button>
+                {search}
+            </form>
+          </div>
           <div className="p-5">
                 <table className="table table-dark">
                   <thead>
@@ -50,10 +62,10 @@ const Portfolio = () => {
                     </tr>
                   </thead>
                   <tbody>
-                        <tr>
-                          <th scope="row"><a href={'./history?'}></a></th>
-                          <td scope="col"></td>
-                        </tr>
+                    <tr>
+                      <th scope="row"><a href={'./history?'}></a></th>
+                        <td scope="col"></td>
+                    </tr>
                   </tbody>
                 </table>
           </div>

@@ -6,7 +6,7 @@ import './home.scss';
 
 class Search extends React.Component {
   state = {
-    error: 'No results.',
+    error: '',
     response: {},
   }
 
@@ -72,7 +72,7 @@ class Search extends React.Component {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-5 output-text">
-                { response.preMarketPrice ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

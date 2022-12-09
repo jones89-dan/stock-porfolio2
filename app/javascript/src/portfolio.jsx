@@ -35,6 +35,7 @@ const Portfolio = () => {
         const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
         const json = await response.json();
         setResponse(json.data);
+        setErrorMessage("No results.")
 
         console.log(json.data)
       } catch (error) {
@@ -60,7 +61,7 @@ const Portfolio = () => {
             <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={addToPortfolio}>Add to Portfolio</button>
             {search}
             <div className="d-flex flex-row text-center">
-              <div className="p-2 mt-5 output-text">
+              <div className="p-2 mt-2 output-text">
                 { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
                   : <p className="text-danger mt-2">{error}</p>
                 }

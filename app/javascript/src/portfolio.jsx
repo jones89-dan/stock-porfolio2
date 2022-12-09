@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
+import $ from 'jquery';
 
 const Portfolio = () => {
 
-  const [apiResponse, setResponse] = useState([])
+  const [response, setResponse] = useState([])
   const [search, addSearch] = useState([])
+  const [error, setErrorMessage] = useState("")
   const querySybmol = location.search.substring(1);
 
-  const getStock = function () {
+  const getStock = function (event) {
+    event.preventDefault();
+    var searchSymbol = $('.a-symbol').val();
+    console.log(searchSymbol)
+    $('.a-symbol').val('');
 
     const encodedParams = new URLSearchParams();
-    encodedParams.append("symbol", querySybmol);
+    encodedParams.append("symbol", searchSymbol);
 
     const options = {
       method: 'POST',
@@ -40,7 +46,10 @@ const Portfolio = () => {
 
   const addToPortfolio = (event) => {
       event.preventDefault();
-      addSearch(<input name="search" type="text" className="form-control form-control-lg mt-3 mr-5 ml-5 a-symbol" placeholder="Search" required />)
+      addSearch(<form className="pt-2" onSubmit={getStock}>
+          <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
+          <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+          </form>)
   }
 
   return (
@@ -48,10 +57,15 @@ const Portfolio = () => {
       <div className="text-white">
         <h1>Portfolio</h1>
           <div className="p-5 text-center search-form">
-            <form onSubmit={addToPortfolio}>
-                <button type="submit" className="btn btn-danger btn-block btn-lg">Add to Portfolio</button>
-                {search}
-            </form>
+            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={addToPortfolio}>Add to Portfolio</button>
+            {search}
+            <div className="d-flex flex-row text-center">
+              <div className="p-2 mt-5 output-text">
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                  : <p className="text-danger mt-2">{error}</p>
+                }
+              </div>
+            </div>
           </div>
           <div className="p-5">
                 <table className="table table-dark">

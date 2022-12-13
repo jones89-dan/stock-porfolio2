@@ -61,7 +61,7 @@ const Trending = () => {
                             return (
                               <tr>
                                 <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                                <td scope="col">${data.currentPrice}</td>
+                                <td scope="col">${data.currentPrice.toFixed(2)}</td>
                               </tr>
                             )
                           })}

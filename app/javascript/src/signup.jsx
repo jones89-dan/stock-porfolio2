@@ -13,7 +13,7 @@ const Signup = props => (
     <h1>Signup</h1>
       <div className="login-signup col-6">
         <div className="float-right sign-up text-white">
-          <form className="p-2 rounded">
+          <form className="p-2 rounded solid pr-4">
             <div className="new-to-t">
               <p className="text-white pt-3"><span> Sign Up</span></p>
             </div>

@@ -62,7 +62,7 @@ const Portfolio = () => {
             {search}
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice} <button className="btn ml-2 btn-danger btn-block">+</button></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

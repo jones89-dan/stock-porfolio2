@@ -10,6 +10,7 @@ const Trending = () => {
     const [error, setError] = useState([])
     const [trending, setTrending] = useState([])
     const trendingArr = []
+    const earningGrowth = document.getElementById("eGrowth");
 
     const getTrending = function (aSymbol) {
       const encodedParams = new URLSearchParams();
@@ -63,8 +64,8 @@ const Trending = () => {
                               <tr>
                                 <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
                                 <td scope="col">${data.currentPrice.toFixed(2)}</td>
-                                <td scope="col">${data.earningsGrowth.toFixed(2)}</td>
-                                {data.earningsGrowth.includes("-") ? console.log("negatvie") : console.log("positve")}
+                                <td scope="col" id="eGrowth">${data.earningsGrowth.toFixed(2)}</td>
+                                {data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")}
                               </tr>
                             )
                           })}

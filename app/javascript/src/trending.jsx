@@ -63,9 +63,9 @@ const Trending = () => {
                             return (
                               <tr>
                                 <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                                <td scope="col">${data.currentPrice.toFixed(2)}</td>
-                                <td scope="col" id="eGrowth">${data.earningsGrowth.toFixed(2)}</td>
-                                {data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")}
+                                <td scope="col">${data.currentPrice}</td>
+                                <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
+                                {/*data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")*/}
                               </tr>
                             )
                           })}

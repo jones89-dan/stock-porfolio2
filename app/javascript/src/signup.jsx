@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
 
-
-
-
 const Signup = props => (
 
     <Layout>
     <div className="text-white">
-    <h1>Signup</h1>
+    <h1>Signup/Login</h1>
       <div className="login-signup col-6">
         <div className="float-right sign-up text-white">
           <form className="p-2 rounded solid">
@@ -30,6 +27,22 @@ const Signup = props => (
             </form>
           </div>
         </div>
+          <div className="login-signup login pt-3 col-6 mb-6">
+            <div className="float-right sign-up text-white">
+              <form className="p-2 rounded solid">
+                <div className="new-to-t">
+                  <p className="text-white pt-3"><span>Log In</span></p>
+                </div>
+                <div className="form-group">
+                  <input type="text" className="form-control username" placeholder="Username"/>
+                </div>
+                <div className="form-group">
+                  <input type="password" className="form-control password" placeholder="Password"/>
+                </div>
+                  <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Sign up</button>
+                </form>
+              </div>
+            </div>
       </div>
     </Layout>
 

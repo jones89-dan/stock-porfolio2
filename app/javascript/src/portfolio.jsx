@@ -9,6 +9,7 @@ const Portfolio = () => {
   const [response, setResponse] = useState([])
   const [search, addSearch] = useState([])
   const [error, setErrorMessage] = useState("")
+  const [portfolioSymbol, setPotfolioSymbol] = useState([])
   const querySybmol = location.search.substring(1);
 
   const getStock = function (event) {
@@ -45,7 +46,7 @@ const Portfolio = () => {
     fetchData();
   }
 
-  const addToPortfolio = (event) => {
+  const showSearch = (event) => {
       event.preventDefault();
       addSearch(<form className="pt-2" onSubmit={getStock}>
           <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
@@ -53,16 +54,20 @@ const Portfolio = () => {
           </form>)
   }
 
+  const addToPortfolion = (event) => {
+    setPotfolioSymbol([response.symbol, ])
+  }
+
   return (
     <Layout>
       <div className="text-white">
         <h1>Portfolio</h1>
           <div className="p-5 text-center search-form">
-            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={addToPortfolio}>Add to Portfolio</button>
+            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={showSearch}>Add to Portfolio</button>
             {search}
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice} <button className="btn ml-2 btn-danger btn-block">+</button></p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}<button className="btn ml-2 btn-danger btn-block" onClick={setPotfolioSymbol([response.symbol])}>+</button></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>
@@ -78,7 +83,7 @@ const Portfolio = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row"><a href={'./history?'}></a></th>
+                      <th scope="row">{portfolioSymbol}<a href={'./history?'}></a></th>
                         <td scope="col"></td>
                     </tr>
                   </tbody>

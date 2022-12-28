@@ -54,8 +54,9 @@ const Portfolio = () => {
           </form>)
   }
 
-  const addToPortfolion = (event) => {
-    setPotfolioSymbol([response.symbol, ])
+  const addToPortfolio = (symbol) => {
+    //event.preventDefault();
+    setPotfolioSymbol(symbol)
   }
 
   return (
@@ -67,7 +68,8 @@ const Portfolio = () => {
             {search}
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}<button className="btn ml-2 btn-danger btn-block" onClick={setPotfolioSymbol([response.symbol])}>+</button></p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p> /
+                <button className="btn ml-2 btn-danger btn-block" onClick={addToPortfolio(response.symbol)}>+</button>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>
@@ -83,7 +85,7 @@ const Portfolio = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">{portfolioSymbol}<a href={'./history?'}></a></th>
+                      <th scope="row">{}<a href={'./history?'}></a></th>
                         <td scope="col"></td>
                     </tr>
                   </tbody>

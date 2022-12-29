@@ -11,6 +11,8 @@ const Portfolio = () => {
   const [error, setErrorMessage] = useState("")
   const [portfolioSymbol, setPotfolioSymbol] = useState([])
   const querySybmol = location.search.substring(1);
+  const [checked, setChecked] = useState(false);
+
 
   const getStock = function (event) {
     event.preventDefault();
@@ -59,6 +61,15 @@ const Portfolio = () => {
     setPotfolioSymbol(symbol)
   }
 
+  const Checkbox = ({ label, value, onChange }) => {
+    return (
+      <label>
+        <input type="checkbox" checked={value} onChange={addToPortfolio} />
+        {label}
+      </label>
+      );
+    };
+
   return (
     <Layout>
       <div className="text-white">
@@ -69,7 +80,7 @@ const Portfolio = () => {
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
                 { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p> /
-                <button className="btn ml-2 btn-danger btn-block" onClick={addToPortfolio(response.symbol)}>+</button>
+                <Checkbox label="Add" value={checked} onChange={addToPortfolio}/>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

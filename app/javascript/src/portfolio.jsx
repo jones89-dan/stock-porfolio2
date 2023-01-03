@@ -58,7 +58,8 @@ const Portfolio = () => {
 
   const addToPortfolio = (symbol) => {
     //event.preventDefault();
-    setPotfolioSymbol(symbol)
+    checked ? setChecked(false) : setChecked(true);
+    setPotfolioSymbol(symbol);
   }
 
   const Checkbox = ({ label, value, onChange }) => {
@@ -75,12 +76,14 @@ const Portfolio = () => {
       <div className="text-white">
         <h1>Portfolio</h1>
           <div className="p-5 text-center search-form">
-            <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={showSearch}>Add to Portfolio</button>
-            {search}
+          <h2>Add to Portfolio</h2>
+            <form className="pt-2" onSubmit={getStock}>
+                <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
+                <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+            </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p> /
-                <Checkbox label="Add" value={checked} onChange={addToPortfolio}/>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add" value={checked} onChange={addToPortfolio}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>
@@ -97,7 +100,7 @@ const Portfolio = () => {
                   <tbody>
                     <tr>
                       <th scope="row">{}<a href={'./history?'}></a></th>
-                        <td scope="col"></td>
+                        <td scope="col">{}</td>
                     </tr>
                   </tbody>
                 </table>

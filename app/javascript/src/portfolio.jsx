@@ -60,6 +60,7 @@ const Portfolio = () => {
     //event.preventDefault();
     checked ? setChecked(false) : setChecked(true);
     setPotfolioSymbol(symbol);
+    console.log(portfolioSymbol);
   }
 
   const Checkbox = ({ label, value, onChange }) => {
@@ -83,7 +84,7 @@ const Portfolio = () => {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add" value={checked} onChange={addToPortfolio}/></p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => addToPortfolio(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

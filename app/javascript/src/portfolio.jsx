@@ -41,6 +41,15 @@ const Portfolio = () => {
         setErrorMessage("No results.")
 
         console.log(json.data)
+
+        // Loop through array of object and collect open/close data
+        for (let i = 0; i <= json.data.length; i++) {
+            if (!json.data[i].hasOwnProperty('symbol')) {
+          console.log(false)
+        }
+          console.log(true)
+        }
+
       } catch (error) {
           console.log("error", error);
       }
@@ -56,8 +65,9 @@ const Portfolio = () => {
           </form>)
   }
 
-  const addToPortfolio = (symbol) => {
+  const addToPortfolio = (event, symbol) => {
     //event.preventDefault();
+    console.log(symbol);
     checked ? setChecked(false) : setChecked(true);
     setPotfolioSymbol(symbol);
     console.log(portfolioSymbol);
@@ -84,7 +94,7 @@ const Portfolio = () => {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => addToPortfolio(response.symbol)}/></p>
+                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

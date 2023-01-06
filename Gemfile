@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Prostgre DB
+gem 'pg'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -47,6 +50,8 @@ group :development do
   gem 'spring'
 
   gem 'dotenv-rails', github: "bkeepers/dotenv"
+
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :test do

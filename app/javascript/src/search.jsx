@@ -72,7 +72,7 @@ class Search extends React.Component {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-5 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                { response.symbol ? <p className="output-response p-3"><a  href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

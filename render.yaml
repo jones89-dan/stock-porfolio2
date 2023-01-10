@@ -1,4 +1,4 @@
-atabases:
+databases:
   - name: production
     databaseName: production
     user: production

@@ -94,7 +94,7 @@ const Portfolio = () => {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response.symbol ? <p><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+                { response.symbol ? <p className="output-response p-3"><a href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

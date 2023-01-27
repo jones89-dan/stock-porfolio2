@@ -33,14 +33,6 @@ const Trending = () => {
           console.log(json.data);
           setTrending(trendingArr => [...trendingArr, json.data]);
 
-          for (let i = 0; i <= json.data.length; i++) {
-              if (!json.data[i].hasOwnProperty('earningsGrowth')) {
-                continue;
-              }
-
-              console.log('true')
-          }
-
         } catch (error) {
             console.log("error", error);
         }
@@ -71,8 +63,8 @@ const Trending = () => {
                             return (
                               <tr>
                                 <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                                <td scope="col">${data.currentPrice.toFixed(2)}</td>
-                                <td scope="col" id="eGrowth">${data.earningsGrowth.toFixed(2)}</td>
+                                <td scope="col">${data.currentPrice}</td>
+                                <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
                                 {/*data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")*/}
                               </tr>
                             )

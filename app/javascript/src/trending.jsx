@@ -54,7 +54,7 @@ const Trending = () => {
                         <thead>
                           <tr>
                             <th scope="col">Symbol</th>
-                            <th scope="col">Current Price</th>
+                            <th scope="col">Current Ask Price</th>
                             <th scope="col">Earnings Growth</th>
                           </tr>
                         </thead>
@@ -62,8 +62,8 @@ const Trending = () => {
                           {trending.map(data => {
                             return (
                               <tr>
-                                <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                                <td scope="col">${data.currentPrice}</td>
+                                <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.shortName}</a></th>
+                                <td scope="col">${data.ask}</td>
                                 <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
                                 {/*data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")*/}
                               </tr>

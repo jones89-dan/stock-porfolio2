@@ -12,12 +12,12 @@ const Trending = () => {
     const trendingArr = []
     const earningGrowth = document.getElementById("eGrowth");
     const [symbol, setSymbol] = useState("")
+    const [id, incrementId] = useState(0);
 
     const getTrending = function (aSymbol) {
       const encodedParams = new URLSearchParams();
       encodedParams.append("symbol", aSymbol);
       setSymbol(aSymbol);
-
 
       const options = {
       	method: 'POST',
@@ -35,6 +35,7 @@ const Trending = () => {
           const json = await response.json();
           console.log(json.data);
           json.data ["symbol"] = aSymbol
+          json.data ["uniqueId"] = incrementId(id + 1)
           setTrending(trendingArr => [...trendingArr, json.data]);
 
         } catch (error) {
@@ -63,13 +64,12 @@ const Trending = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {trending.map(data => {
+                          {trending.map((data, index) => {
                             return (
-                              <tr>
-                                <th scope="row" key={data.symbol}><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
+                              <tr key={index}>
+                                <th scope="row"><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
                                 <td scope="col">${data.ask}</td>
                                 <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
-                                {/*data.earningsGrowth < 0 ? document.getElementById("eGrowth").className="red" : console.log("positve")*/}
                               </tr>
                             )
                           })}

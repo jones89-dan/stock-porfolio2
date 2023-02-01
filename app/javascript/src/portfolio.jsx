@@ -10,15 +10,17 @@ const Portfolio = () => {
   const [search, addSearch] = useState([])
   const [error, setErrorMessage] = useState("")
   const [portfolioSymbol, setPotfolioSymbol] = useState([])
-  const querySybmol = location.search.substring(1);
-  const [checked, setChecked] = useState(false);
+  const querySybmol = location.search.substring(1)
+  const [checked, setChecked] = useState(false)
+  const [symbol, setSymbol] = useState("")
 
 
   const getStock = function (event) {
     event.preventDefault();
     var searchSymbol = $('.a-symbol').val();
-    console.log(searchSymbol)
+    console.log(searchSymbol);
     $('.a-symbol').val('');
+    setSymbol(searchSymbol);
 
     const encodedParams = new URLSearchParams();
     encodedParams.append("symbol", searchSymbol);
@@ -99,7 +101,7 @@ const Portfolio = () => {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-2 output-text">
-                { response ? <p className="output-response p-3"><a href={'./history?' + response.symbol}>{response.symbol} </a>Ask Price: {response.ask}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+                { response ? <p className="output-response p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

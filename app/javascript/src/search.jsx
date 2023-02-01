@@ -8,6 +8,8 @@ class Search extends React.Component {
   state = {
     error: '',
     response: {},
+    responseStatus: {},
+    symbol: '',
   }
 
   handleChange = (e) => {
@@ -21,6 +23,10 @@ class Search extends React.Component {
     var searchSymbol = $('.a-symbol').val();
     console.log(searchSymbol)
     $('.a-symbol').val('');
+
+    this.setState({
+      symbol: searchSymbol
+    });
 
     const encodedParams = new URLSearchParams();
     encodedParams.append("symbol", searchSymbol);
@@ -39,10 +45,11 @@ class Search extends React.Component {
         try {
           const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
           const json = await response.json();
-          console.log(json.data);
+          console.log(json);
           this.setState({
             response: json.data,
-            error: "No results."
+            error: "No results.",
+            responseStatus: json,
           });
 
         }
@@ -77,8 +84,8 @@ class Search extends React.Component {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-5 output-text">
-                { response ? <p className="output-response p-3"><a  href={'./history?' + response.symbol}>{response.symbol} </a>Ask Price: {response.ask}</p>
-                  : <p className="text-danger mt-2">{error}</p>
+                { response ? <p className="output-response p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}</p>
+                : <p className="text-danger mt-2">{error}</p>
                 }
               </div>
             </div>

@@ -45,8 +45,13 @@ class Search extends React.Component {
             error: "No results."
           });
 
-        } catch (error) {
+        }
+        catch (error) {
             console.log("error", error);
+            this.setState({
+              error: "No results."
+            });
+            return false;
         }
       }
       fetchData()
@@ -72,7 +77,7 @@ class Search extends React.Component {
             </form>
             <div className="d-flex flex-row text-center">
               <div className="p-2 mt-5 output-text">
-                { response.symbol ? <p className="output-response p-3"><a  href={'./history?' + response.symbol}>{response.symbol} </a>Current Price: {response.currentPrice}</p>
+                { response ? <p className="output-response p-3"><a  href={'./history?' + response.symbol}>{response.symbol} </a>Ask Price: {response.ask}</p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

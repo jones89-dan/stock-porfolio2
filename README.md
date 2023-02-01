@@ -2,6 +2,8 @@
 
 check out the site: https://fullstack-stock-portfolio.herokuapp.com/
 
+To run this app run through the following steps:
+
 1. Install GEMS
 
 ```

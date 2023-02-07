@@ -23,7 +23,7 @@ const Signup = props => (
             <div className="form-group">
               <input type="password" className="form-control password" placeholder="Password"/>
             </div>
-              <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Sign up</button>
+              <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Sign Up</button>
             </form>
           </div>
         </div>
@@ -39,7 +39,7 @@ const Signup = props => (
                 <div className="form-group">
                   <input type="password" className="form-control password" placeholder="Password"/>
                 </div>
-                  <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Sign up</button>
+                  <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Log In</button>
                 </form>
               </div>
             </div>

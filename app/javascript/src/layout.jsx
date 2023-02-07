@@ -11,9 +11,6 @@ const Layout = (props) => {
           <a className="navbar-brand" href='/'></a>
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav">
-              <li className="nav-item stock-image float-left">
-                <a className="nav-link" href="/"><img src={image}/></a>
-              </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/">Home</a>
                 </li>

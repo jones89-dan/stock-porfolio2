@@ -97,11 +97,11 @@ const Portfolio = () => {
           <h2>Add to Portfolio</h2>
             <form className="pt-2" onSubmit={getStock}>
                 <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
-                <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+                <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
-            <div className="d-flex flex-row text-center">
-              <div className="p-2 mt-2 output-text">
-                { response ? <p className="output-response p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+            <div className="">
+              <div className="p-2 mt-5 text-center output-response">
+                { response ? <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

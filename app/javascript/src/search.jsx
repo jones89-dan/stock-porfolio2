@@ -80,11 +80,11 @@ class Search extends React.Component {
           <div className="p-5 text-center search-form">
             <form onSubmit={this.searchSymbol}>
                 <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
-                <button type="submit" className="btn btn-danger btn-block btn-lg">Search</button>
+                <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
-            <div className="d-flex flex-row text-center">
-              <div className="p-2 mt-5 output-text">
-                { response ? <p className="output-response p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}</p>
+            <div className="">
+              <div className="p-2 mt-5 output-text output-response">
+                { response ? <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}</p>
                 : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

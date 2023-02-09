@@ -76,7 +76,7 @@ const History = () => {
 
         console.log(json.data)
         // Loop through array of object and collect open/close data
-        for (let i = 0; i <= json.data.length; i++) {
+        for (let i = 0; i <= json.data.length; i++) d{
             if (!json.data[i].hasOwnProperty('Open')) {
         continue;
         }

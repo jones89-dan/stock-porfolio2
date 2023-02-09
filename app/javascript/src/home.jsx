@@ -54,7 +54,7 @@ const Home = () => {
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto text-center">
             <div className="col p-2 d-inline-block text-white">
-              <div className="w-auto p-5">
+              <div className="w-auto p-3 pb-5 pt-5">
                 <p className="type-writer">{text}</p>
               </div>
             </div>

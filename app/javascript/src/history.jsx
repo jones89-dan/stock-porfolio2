@@ -182,7 +182,7 @@ const History = () => {
               <button type="submit" className="btn btn-danger btn-block btn-lg" onClick={event => customSearch(event, startDate, endDate)}>Search</button>
             </div>
           </div>
-        <canvas className="p-5 thisChart" id="myChart" style={{width:"400", height:"400"}}></canvas>
+        <canvas className="p-2 thisChart" id="myChart" style={{width:"400", height:"400"}}></canvas>
       </div>
     </Layout>
   )

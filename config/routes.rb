@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   get '/search'           => 'static_pages#search'
   get '/history'          => 'static_pages#history'
 
+  # USERS
+  post '/users' => 'users#create'
+
 end

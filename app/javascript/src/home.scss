@@ -2,6 +2,11 @@ body {
   background-color: black;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 #hero {
   background-image: url(images/hero2.jpg);
   background-size: cover;
@@ -33,11 +38,12 @@ body {
 }
 
 .trendingCol {
-  width: 500px;
+  width: 405px;
 }
 
 .type-writer {
   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+
 }
 
 @keyframes blink {

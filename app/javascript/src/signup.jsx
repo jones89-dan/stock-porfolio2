@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
+import $ from 'jquery';
+import { createUser, signInUser, authenticate } from './utils/requests'
 
-const Signup = () => (
+const Signup = () => {
 
   const handleFormSubmission = (event) => {
     event.preventDefault();
@@ -27,7 +29,7 @@ const Signup = () => (
       }
     });
   }
-
+  return (
     <Layout>
     <div className="text-white">
     <h1>Signup/Login</h1>
@@ -68,8 +70,8 @@ const Signup = () => (
             </div>
       </div>
     </Layout>
-
-)
+  )
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

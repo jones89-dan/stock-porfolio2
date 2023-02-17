@@ -14,7 +14,7 @@ $.ajaxSetup({
 export var createUser = function (username, email, password, callback) {
   var request = {
     type: 'POST',
-    url: 'api/users',
+    url: 'users',
     data: {
       user: {
         username: username,
@@ -33,7 +33,7 @@ export var createUser = function (username, email, password, callback) {
 export var signInUser = function (username, password, callback) {
   var request = {
     type: 'POST',
-    url: 'api/sessions',
+    url: 'sessions',
     data: {
       user: {
         username: username,
@@ -51,7 +51,7 @@ export var signInUser = function (username, password, callback) {
 export var authenticate = function (callback) {
   var request = {
     type: 'GET',
-    url: '/api/authenticated',
+    url: 'authenticated',
     success: function (response) {
       callback(response);
     }

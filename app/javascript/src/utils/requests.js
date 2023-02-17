@@ -10,6 +10,43 @@ $.ajaxSetup({
   }
 });
 
+// Create new user
+export var createUser = function (username, email, password, callback) {
+  var request = {
+    type: 'POST',
+    url: 'api/users',
+    data: {
+      user: {
+        username: username,
+        email: email,
+        password: password
+      }
+    },
+    success: function (response) {
+      callback(response);
+    }
+  };
+  $.ajax(request);
+};
+
+// Log in user
+export var signInUser = function (username, password, callback) {
+  var request = {
+    type: 'POST',
+    url: 'api/sessions',
+    data: {
+      user: {
+        username: username,
+        password: password
+      }
+    },
+    success: function (response) {
+      callback(response);
+    }
+  };
+  $.ajax(request);
+};
+
 // Authenticate user
 export var authenticate = function (callback) {
   var request = {

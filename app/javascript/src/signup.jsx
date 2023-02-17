@@ -3,14 +3,37 @@ import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
 
-const Signup = props => (
+const Signup = () => (
+
+  const handleFormSubmission = (event) => {
+    event.preventDefault();
+
+    var userName = $('.username').val();
+    var userEmail = $('.email').val();
+    var userPassword = $('.password').val();
+
+    createUser(userName, userEmail, userPassword, function (response) {
+      signInUser(userName, userPassword, function(){
+        //authenRedirect();
+      });
+      if (response.success == false) {
+        console.log(response.error);
+      }
+      else {
+        console.log('User ' + userName + ' signed up')
+        signInUser(userName, userPassword, function(){
+          //authenRedirect();
+        });
+      }
+    });
+  }
 
     <Layout>
     <div className="text-white">
     <h1>Signup/Login</h1>
       <div className="login-signup col-6">
         <div className="float-right sign-up text-white">
-          <form className="p-2 rounded solid">
+          <form className="p-2 rounded solid" onSubmit={handleFormSubmission}>
             <div className="new-to-t">
               <p className="text-white pt-3"><span> Sign Up</span></p>
             </div>

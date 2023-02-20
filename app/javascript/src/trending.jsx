@@ -31,7 +31,7 @@ const Trending = () => {
 
       const fetchData = async() => {
         try {
-          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/simple-info', options);
           const json = await response.json();
           console.log(json.data);
           json.data ["symbol"] = aSymbol
@@ -68,7 +68,7 @@ const Trending = () => {
                             return (
                               <tr key={index}>
                                 <th scope="row"><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
-                                <td scope="col">${data.ask}</td>
+                                <td scope="col">${data.lastPrice}</td>
                                 <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
                               </tr>
                             )

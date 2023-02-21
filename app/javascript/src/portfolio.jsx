@@ -37,7 +37,7 @@ const Portfolio = () => {
 
     const fetchData = async() => {
       try {
-        const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+        const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-simple', options);
         const json = await response.json();
         setResponse(json.data);
         setErrorMessage("No results.")
@@ -101,7 +101,7 @@ const Portfolio = () => {
             </form>
             <div className="">
               <div className="p-2 mt-5 text-center output-response">
-                { response ? <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+                { response ? <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.lastPrice.toFixed(2)}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
                   : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

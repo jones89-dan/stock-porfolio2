@@ -43,7 +43,7 @@ class Search extends React.Component {
 
       const fetchData = async() => {
         try {
-          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/stock-info', options);
+          const response = await fetch('https://yahoo-finance97.p.rapidapi.com/simple-info', options);
           const json = await response.json();
           console.log(json);
           this.setState({
@@ -84,7 +84,7 @@ class Search extends React.Component {
             </form>
             <div className="">
               <div className="p-2 mt-5 output-text output-response">
-                { response ? <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.ask}</p>
+                { response ? <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.lastPrice}</p>
                 : <p className="text-danger mt-2">{error}</p>
                 }
               </div>

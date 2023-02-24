@@ -96,10 +96,10 @@ class Search extends React.Component {
                 <input name="search" type="text" className="form-control form-control-lg mb-3 mr-5 ml-5 a-symbol" placeholder="Search" required />
                 <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
-            <div className="">
+            <div className="at-container">
 
                 { responseStatus == true ?
-                  <div className="p-2 mt-5 output-text output-response">
+                  <div className="p-2 mt-5 output-text output-response at-item">
                     <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}</p>
                   </div>
                 : <p className="text-danger mt-2">{error}</p>

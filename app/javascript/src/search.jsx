@@ -48,9 +48,15 @@ class Search extends React.Component {
           console.log(json);
           this.setState({
             response: json.data,
-            error: "No results.",
             responseStatus: json,
           });
+
+          // check for 400 response, set error message.
+          if (json.status == 400) {
+              this.setState({
+                error: "No results.",
+              });
+          }
 
         }
         catch (error) {
@@ -69,6 +75,8 @@ class Search extends React.Component {
           error: ""
         })
     }
+
+
 
   render () {
     const { symbol, error, response } = this.state;

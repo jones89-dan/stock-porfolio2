@@ -8,7 +8,7 @@ class Search extends React.Component {
   state = {
     error: '',
     response: {},
-    responseStatus: {},
+    responseStatus: false,
     symbol: '',
   }
 
@@ -58,6 +58,14 @@ class Search extends React.Component {
               });
           }
 
+          // check for 200 response, set response status.
+          if (json.status == 200) {
+            console.log("tis 200");
+            this.setState({
+              responseStatus: true,
+            });
+          }
+
         }
         catch (error) {
             console.log("error", error);
@@ -76,10 +84,8 @@ class Search extends React.Component {
         })
     }
 
-
-
   render () {
-    const { symbol, error, response } = this.state;
+    const { symbol, error, response, responseStatus } = this.state;
 
     return (
       <Layout>
@@ -91,11 +97,14 @@ class Search extends React.Component {
                 <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
             <div className="">
-              <div className="p-2 mt-5 output-text output-response">
-                { response ? <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.lastPrice}</p>
+
+                { responseStatus == true ?
+                  <div className="p-2 mt-5 output-text output-response">
+                    <p className= "p-3"><a  href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}</p>
+                  </div>
                 : <p className="text-danger mt-2">{error}</p>
                 }
-              </div>
+
             </div>
           </div>
         </div>

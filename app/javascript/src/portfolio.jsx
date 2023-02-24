@@ -13,6 +13,7 @@ const Portfolio = () => {
   const querySybmol = location.search.substring(1)
   const [checked, setChecked] = useState(false)
   const [symbol, setSymbol] = useState("")
+  const [responseStatus, setResponseStatus] = useState(false)
 
 
   const getStock = function (event) {
@@ -40,7 +41,20 @@ const Portfolio = () => {
         const response = await fetch('https://yahoo-finance97.p.rapidapi.com/simple-info', options);
         const json = await response.json();
         setResponse(json.data);
-        setErrorMessage("No results.")
+        //setErrorMessage("No results.")
+
+        // check for 400 response, set error message.
+        if (json.status == 400) {
+            setErrorMessage("No results.")
+            return;
+        }
+
+        // check for 200 response, set response status.
+        if (json.status == 200) {
+          console.log("tis 200");
+          setResponseStatus(true)
+
+        }
 
         console.log(json.data)
 
@@ -54,9 +68,7 @@ const Portfolio = () => {
 
       } catch (error) {
           console.log("error", error);
-          this.setState({
-            error: "No results."
-          });
+          setErrorMessage("No results.");
           return false;
 
       }
@@ -100,11 +112,14 @@ const Portfolio = () => {
                 <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
             <div className="">
-              <div className="p-2 mt-5 text-center output-response">
-                { response ? <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Ask Price: {response.lastPrice}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+
+                { responseStatus == true  ?
+                  <div className="p-2 mt-5 text-center output-response">
+                    <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+                  </div>
                   : <p className="text-danger mt-2">{error}</p>
                 }
-              </div>
+
             </div>
           </div>
           <div className="p-5">

@@ -16,4 +16,7 @@ class StaticPagesController < ApplicationController
 
   def history
   end
+
+  def users
+  end
 end

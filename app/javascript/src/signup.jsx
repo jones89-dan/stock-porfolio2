@@ -15,17 +15,12 @@ const Signup = () => {
     var userPassword = $('.password').val();
 
     createUser(userName, userEmail, userPassword, function (response) {
-      signInUser(userName, userPassword, function(){
-        //authenRedirect();
-      });
+
       if (response.success == false) {
         console.log(response.error);
       }
       else {
         console.log('User ' + userName + ' signed up')
-        signInUser(userName, userPassword, function(){
-          //authenRedirect();
-        });
       }
     });
   }

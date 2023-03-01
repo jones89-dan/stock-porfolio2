@@ -7,6 +7,7 @@ import { createUser, signInUser, authenticate } from './utils/requests'
 
 const Signup = () => {
 
+  // Crete user on form submission
   const handleFormSubmission = (event) => {
     event.preventDefault();
 
@@ -24,6 +25,25 @@ const Signup = () => {
       }
     });
   }
+
+  // Login the user on form submit
+  const login = (event) => {
+    event.preventDefault();
+
+    var userName = $('.username').val();
+    var userPassword = $('.password').val();
+
+    signInUser(userName, userPassword, function (response) {
+
+      if (response.success == false) {
+        console.log(response.error);
+      }
+      else {
+        console.log('User ' + userName + ' signed in')
+      }
+    });
+  }
+
   return (
     <Layout>
     <div className="text-white">
@@ -49,7 +69,7 @@ const Signup = () => {
         </div>
           <div className="login-signup login pt-3 col-6 mb-6">
             <div className="float-right sign-up text-white">
-              <form className="p-2 rounded solid">
+              <form className="p-2 rounded solid" onSubmit={login}>
                 <div className="new-to-t">
                   <p className="text-white pt-3"><span>Log In</span></p>
                 </div>

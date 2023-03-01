@@ -2,9 +2,9 @@ class SessionsController < ApplicationController
 
   # Create session
   def create
-    @user = User.find_by(username: params[:user][:username])
+    @user = User.find_by(username: params[:username])
 
-      if @user and BCrypt::Password.new(@user.password) == params[:user][:password]
+      if @user and BCrypt::Password.new(@user.password) == params[:username][:password]
         session = @user.sessions.create
         cookies.permanent.signed[:stock_session_token] = {
           value: session.token,

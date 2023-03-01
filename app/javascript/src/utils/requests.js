@@ -16,11 +16,11 @@ export var createUser = function (username, email, password, callback) {
     type: 'POST',
     url: 'users',
     data: {
-      user: {
+
         username: username,
-        email: email,
-        password: password
-      }
+        password: password,
+        email: email
+
     },
     success: function (response) {
       callback(response);

@@ -16,9 +16,11 @@ export var createUser = function (username, email, password, callback) {
     type: 'POST',
     url: 'users',
     data: {
+      user: {
         username: username,
-        password: password,
-        email: email
+        email: email,
+        password: password
+      }
     },
     success: function (response) {
       callback(response);
@@ -33,8 +35,10 @@ export var signInUser = function (username, password, callback) {
     type: 'POST',
     url: 'sessions',
     data: {
+      user: {
         username: username,
         password: password
+      }
     },
     success: function (response) {
       callback(response);

@@ -2,23 +2,23 @@ class SessionsController < ApplicationController
 
   # Create session
   def create
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(username: params[:user][:username])
 
-      if @user and BCrypt::Password.new(@user.password) == params[:username][:password]
-        session = @user.sessions.create
-        cookies.permanent.signed[:stock_session_token] = {
-          value: session.token,
-          httponly: true
-        }
+     if @user and BCrypt::Password.new(@user.password) == params[:user][:password]
+       session = @user.sessions.create
+       cookies.permanent.signed[:stock_session_token] = {
+         value: session.token,
+         httponly: true
+       }
 
-         render json: {
-           success: true
-         }
-      else
         render json: {
-          success: false
+          success: true
         }
-      end
+     else
+       render json: {
+         success: false
+       }
+     end
   end
 
   # Check authentication
@@ -48,10 +48,4 @@ class SessionsController < ApplicationController
       }
     end
   end
-
-  private
-    def user_params
-      params.permit(:username, :password)
-    end
-
 end

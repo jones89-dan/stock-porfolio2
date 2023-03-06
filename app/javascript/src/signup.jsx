@@ -21,7 +21,10 @@ const Signup = () => {
         console.log(response.error);
       }
       else {
-        console.log('User ' + userName + ' signed up')
+        console.log('User ' + userName + ' signed up');
+        signInUser(userName, userPassword, function(){
+          authenRedirect();
+        });
       }
     });
   }
@@ -34,15 +37,24 @@ const Signup = () => {
     var userPassword = $('.password').val();
 
     signInUser(userName, userPassword, function (response) {
-
+       authenRedirect();
       if (response.success == false) {
         console.log(response.error);
       }
       else {
         console.log('User ' + userName + ' signed in')
+        authenRedirect();
       }
     });
   }
+
+  function authenRedirect() {
+    authenticate(function(response) {
+      if(response.authenticated) {
+        window.location.replace("/portfolio");
+      }
+    });
+  };
 
   return (
     <Layout>

@@ -71,6 +71,18 @@ export var  getCurrentUser = function (callback) {
   });
 };
 
+// Log out user (delete session)
+export var logOutUser = function (callback) {
+  var request = {
+    type: 'DELETE',
+    url: 'sessions',
+    success: function (response) {
+      callback(response);
+    }
+  };
+  $.ajax(request);
+};
+
 export var getSymbolData = function (symbol) {
   var request = {
     type: 'GET',

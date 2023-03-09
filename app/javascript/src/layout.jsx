@@ -9,7 +9,8 @@ const Layout = (props) => {
 
   const handleLogout = function () {
     getCurrentUser(function (response) {
-      setCurrentUser(response.username);;
+      setCurrentUser(response.username);
+      console.log(currentUser)
     })
 
     logOutUser(function (response) {

@@ -66,7 +66,8 @@ export var  getCurrentUser = function (callback) {
       callback(response);
     }
     else if (response.authenticated ==  false) {
-      window.location.replace('/');
+      //window.location.replace('/');
+      callback(response);
     }
   });
 };

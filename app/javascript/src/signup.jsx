@@ -33,8 +33,8 @@ const Signup = () => {
   const login = (event) => {
     event.preventDefault();
 
-    var userName = $('.username').val();
-    var userPassword = $('.password').val();
+    var userName = $('.username-signIn').val();
+    var userPassword = $('.password-signIn').val();
 
     signInUser(userName, userPassword, function (response) {
        authenRedirect();
@@ -86,10 +86,10 @@ const Signup = () => {
                   <p className="text-white pt-3"><span>Log In</span></p>
                 </div>
                 <div className="form-group">
-                  <input type="text" className="form-control username" placeholder="Username"/>
+                  <input type="text" className="form-control username-signIn" placeholder="Username"/>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control password" placeholder="Password"/>
+                  <input type="password" className="form-control password-signIn" placeholder="Password"/>
                 </div>
                   <button type="submit" id="sign-up-btn" className="btn btn-default btn-danger pull-right">Log In</button>
                 </form>

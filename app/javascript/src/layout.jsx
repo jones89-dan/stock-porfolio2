@@ -14,12 +14,12 @@ const Layout = (props) => {
 
     logOutUser(function (response) {
       if (response.success == true) {
-        //window.location.replace('/');
+        window.location.replace('/');
       };
     });
   };
 
-  
+
 
   return (
     <React.Fragment>

@@ -60,7 +60,8 @@ const Trending = () => {
                           <tr>
                             <th scope="col">Symbol</th>
                             <th scope="col">Current Ask Price</th>
-                            <th scope="col">Earnings Growth</th>
+                            <th scope="col">Daily High</th>
+                            <th scope="col">Daily Low</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -69,7 +70,8 @@ const Trending = () => {
                               <tr key={index}>
                                 <th scope="row"><a href={'./history?' + data.symbol}>{data.symbol}</a></th>
                                 <td scope="col">${data.lastPrice.toFixed(2)}</td>
-                                <td scope="col" id="eGrowth">${data.earningsGrowth}</td>
+                                <td scope="col">${data.dayHigh.toFixed(2)}</td>
+                                <td scope="col">${data.dayLow.toFixed(2)}</td>
                               </tr>
                             )
                           })}

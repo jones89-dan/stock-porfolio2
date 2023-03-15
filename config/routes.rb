@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   get '/search'           => 'static_pages#search'
   get '/history'          => 'static_pages#history'
 
-  # USERS
-  post '/users' => 'users#create'
+  # User
+  post '/users'           => 'users#create'
 
-  # SESSIONS
-  post '/sessions' => 'sessions#create'
-  get '/authenticated' => 'sessions#authenticated'
-  delete '/sessions' => 'sessions#destroy'
+  # Sessions
+  post '/sessions'        => 'sessions#create'
+  get '/authenticated'    => 'sessions#authenticated'
+  delete '/sessions'      => 'sessions#destroy'
+
+  # Portfolio
+  post '/addToPortfolio'  => 'portfolio#add'
 
 end

@@ -97,3 +97,14 @@ export var getSymbolData = function (symbol) {
   }
   $.ajax(request);
 };
+
+export var addToPortfolio = function (symbol) {
+  var request = {
+    type: 'POST',
+    url: 'addToPortfolio',
+    success: function (response) {
+      callback(response);
+    }
+  }
+  $.ajax(request);
+}

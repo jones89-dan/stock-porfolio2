@@ -6,7 +6,13 @@ class PortfoliosController < ApplicationController
       @symbol = user.portfolios.new(portfolio_params)
 
       if @symbol.save
-        render ''
+        render json: {
+          success: true
+        }
+     else
+       render json: {
+         success: false
+       }
       end
     end
 

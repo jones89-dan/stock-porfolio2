@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
+import { addToPortfolio } from './utils/requests'
 import $ from 'jquery';
 
 const Portfolio = () => {
@@ -84,12 +85,11 @@ const Portfolio = () => {
           </form>)
   }
 
-  const addToPortfolio = (event, symbol) => {
-    //event.preventDefault();
+  const insertToPortfolio = function (event) {
+    event.preventDefault();
     console.log(symbol);
-    checked ? setChecked(false) : setChecked(true);
-    setPotfolioSymbol(symbol);
-    console.log(portfolioSymbol);
+    addToPortfolio(symbol)
+    return
   }
 
   const Checkbox = ({ label, value, onChange }) => {
@@ -115,7 +115,10 @@ const Portfolio = () => {
 
                 { responseStatus == true  ?
                   <div className="p-2 mt-5 text-center output-response">
-                    <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}&nbsp;<Checkbox label="Add to Portfolio" value={checked} onChange={() => setPotfolioSymbol(response.symbol)}/></p>
+                    <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}&nbsp;</p>
+                      <form onSubmit={insertToPortfolio}>
+                        <button type="submit">Add to Portfolio</button>
+                      </form>
                   </div>
                   : <p className="text-danger mt-2">{error}</p>
                 }

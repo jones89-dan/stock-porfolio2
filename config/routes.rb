@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   delete '/sessions'      => 'sessions#destroy'
 
   # Portfolio
-  post '/addToPortfolio'  => 'portfolio#add'
+  post '/addToPortfolio'  => 'portfolios#add'
 
 end

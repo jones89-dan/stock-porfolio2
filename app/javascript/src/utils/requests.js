@@ -102,6 +102,11 @@ export var addToPortfolio = function (symbol) {
   var request = {
     type: 'POST',
     url: 'addToPortfolio',
+    data: {
+      portfolio: {
+        symbol: symbol,
+      }
+    },
     success: function (response) {
       callback(response);
     }

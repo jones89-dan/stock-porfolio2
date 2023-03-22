@@ -16,6 +16,15 @@ class PortfoliosController < ApplicationController
       end
     end
 
+    def index
+      user = User.find_by(username: params[:username])
+
+      if user
+        @symbols = user.portfolios
+        render 'portfolios/index'
+      end
+    end
+
 private
   def portfolio_params
        params.require(:portfolio).permit(:symbol)

@@ -3,9 +3,9 @@ class PortfoliosController < ApplicationController
       token = cookies.signed[:stock_session_token]
       session = Session.find_by(token: token)
       user = session.user
-      @symbol = user.portfolio.new(portfolio_params)
+      symbol = user.portfolios.new(portfolio_params)
 
-      if @symbol.save
+      if symbol.save
         render json: {
           success: true
         }

@@ -88,7 +88,14 @@ const Portfolio = () => {
   const insertToPortfolio = function (event) {
     event.preventDefault();
     console.log(symbol);
-    addToPortfolio(symbol)
+    addToPortfolio(symbol, function (response) {
+      if (response.success == false) {
+        console.log(response.error)
+      }
+      else{
+        console.log("success")
+      }
+    });
     return
   }
 

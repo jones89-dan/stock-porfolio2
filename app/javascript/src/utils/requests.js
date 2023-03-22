@@ -98,7 +98,7 @@ export var getSymbolData = function (symbol) {
   $.ajax(request);
 };
 
-export var addToPortfolio = function (symbol) {
+export var addToPortfolio = function (symbol, callback) {
   var request = {
     type: 'POST',
     url: 'addToPortfolio',

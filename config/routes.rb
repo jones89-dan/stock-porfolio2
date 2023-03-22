@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   # Portfolio
   post '/addToPortfolio'  => 'portfolios#add'
+  get '/index'            => 'portfolios#index'
 
 end

@@ -84,6 +84,7 @@ export var logOutUser = function (callback) {
   $.ajax(request);
 };
 
+// find symbol
 export var getSymbolData = function (symbol) {
   var request = {
     type: 'GET',
@@ -98,6 +99,7 @@ export var getSymbolData = function (symbol) {
   $.ajax(request);
 };
 
+// add to users prortfolio
 export var addToPortfolio = function (symbol, callback) {
   var request = {
     type: 'POST',
@@ -109,6 +111,23 @@ export var addToPortfolio = function (symbol, callback) {
     },
     success: function (response) {
       callback(response);
+    }
+  }
+  $.ajax(request);
+}
+
+// index users portfolio
+export var index = function (username, callback) {
+  var request = {
+    type: 'GET',
+    url: '/index',
+    success: function (response) {
+      if (response.error) {
+        window.location.replace('/signup');
+      }
+      else {
+        callback(response);
+      }
     }
   }
   $.ajax(request);

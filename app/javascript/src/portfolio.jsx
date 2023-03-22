@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
-import { addToPortfolio } from './utils/requests'
+import { addToPortfolio, index } from './utils/requests'
 import $ from 'jquery';
 
 const Portfolio = () => {
@@ -71,7 +71,6 @@ const Portfolio = () => {
           console.log("error", error);
           setErrorMessage("No results.");
           return false;
-
       }
     };
     fetchData();

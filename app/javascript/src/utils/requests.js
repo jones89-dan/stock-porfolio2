@@ -120,7 +120,7 @@ export var addToPortfolio = function (symbol, callback) {
 export var index = function (username, callback) {
   var request = {
     type: 'GET',
-    url: '/index',
+    url: '/index/' + username,
     success: function (response) {
       if (response.error) {
         window.location.replace('/signup');

@@ -16,7 +16,7 @@ class PortfoliosController < ApplicationController
       end
     end
 
-    def index
+    def indexPortfolio
       user = User.find_by(username: params[:username])
 
       if user

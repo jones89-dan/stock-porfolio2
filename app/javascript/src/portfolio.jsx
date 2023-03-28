@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
-import { addToPortfolio, index } from './utils/requests'
+import { addToPortfolio, index, getCurrentUser } from './utils/requests'
 import $ from 'jquery';
 
 const Portfolio = () => {
@@ -15,6 +15,12 @@ const Portfolio = () => {
   const [checked, setChecked] = useState(false)
   const [symbol, setSymbol] = useState("")
   const [responseStatus, setResponseStatus] = useState(false)
+  const [portfolio, setPortfolio] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
+
+  const allStocks = function (response) {
+    setPortfolio(response.portfolios.map(portfolio => portfolio));
+  };
 
 
   const getStock = function (event) {
@@ -98,6 +104,14 @@ const Portfolio = () => {
     return
   }
 
+  useEffect(() => {
+    getCurrentUser(function (response) {
+      console.log(response)
+      setCurrentUser(response.username);
+    });
+    index(currentUser, allStocks);
+  }, []);
+
   const Checkbox = ({ label, value, onChange }) => {
     return (
       <label>
@@ -118,7 +132,6 @@ const Portfolio = () => {
                 <button type="submit" className="btn btn-danger btn-block btn-lg form-button">Search</button>
             </form>
             <div className="">
-
                 { responseStatus == true  ?
                   <div className="p-2 mt-5 text-center output-response">
                     <p className="p-3"><a href={'./history?' + symbol}>{symbol} </a>Price: ${response.lastPrice.toFixed(2)}&nbsp;</p>
@@ -128,7 +141,6 @@ const Portfolio = () => {
                   </div>
                   : <p className="text-danger mt-2">{error}</p>
                 }
-
             </div>
           </div>
           <div className="p-5">

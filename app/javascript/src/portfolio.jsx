@@ -19,7 +19,7 @@ const Portfolio = () => {
   const [currentUser, setCurrentUser] = useState("");
 
   const allStocks = function (response) {
-    setPortfolio(response.portfolios.map(portfolio => portfolio));
+    setPortfolio(response.symbols.map(symbol => symbol));
   };
 
 
@@ -106,10 +106,11 @@ const Portfolio = () => {
 
   useEffect(() => {
     getCurrentUser(function (response) {
-      console.log(response)
-      setCurrentUser(response.username);
+      console.log(response.username)
+      //setCurrentUser(response.username);
+      index(response.username, allStocks);
     });
-    index(currentUser, allStocks);
+    //index(currentUser, allStocks);
   }, []);
 
   const Checkbox = ({ label, value, onChange }) => {
@@ -152,10 +153,14 @@ const Portfolio = () => {
                     </tr>
                   </thead>
                   <tbody>
+                  {portfolio.map(symbol => {
+                  return (
                     <tr>
-                      <th scope="row">{}<a href={'./history?'}></a></th>
+                      <th scope="row">{symbol.symbol}<a href={'./history?'}></a></th>
                         <td scope="col">{}</td>
                     </tr>
+                  )
+                })}
                   </tbody>
                 </table>
           </div>

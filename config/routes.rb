@@ -21,6 +21,6 @@ Rails.application.routes.draw do
 
   # Portfolio
   post '/addToPortfolio'  => 'portfolios#add'
-  get '/index/:username'  => 'portfolios#indexPortfolio'
+  get '/index/:username', to: 'portfolios#indexPortfolio'
 
 end

@@ -15,7 +15,7 @@ const Portfolio = () => {
   const [checked, setChecked] = useState(false)
   const [symbol, setSymbol] = useState("")
   const [responseStatus, setResponseStatus] = useState(false)
-  const [portfolio, setPortfolio] = useState([]);
+  const [portfolios, setPortfolio] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
   const allStocks = function (response) {
@@ -153,10 +153,10 @@ const Portfolio = () => {
                     </tr>
                   </thead>
                   <tbody>
-                  {portfolio.map(symbol => {
+                  {portfolios.map((portfolio, index) => {
                   return (
-                    <tr>
-                      <th scope="row">{symbol.symbol}<a href={'./history?'}></a></th>
+                    <tr key={index}>
+                      <th scope="row"><a href={'./history?' + portfolio.symbol}>{portfolio.symbol}</a></th>
                         <td scope="col">{}</td>
                     </tr>
                   )

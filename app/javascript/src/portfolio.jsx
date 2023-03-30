@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './home.scss';
 import Layout from './layout';
-import { addToPortfolio, index, getCurrentUser } from './utils/requests'
+import { addToPortfolio, index, getCurrentUser, getTrending } from './utils/requests'
 import $ from 'jquery';
 
 const Portfolio = () => {
@@ -109,6 +109,7 @@ const Portfolio = () => {
       console.log(response.username)
       //setCurrentUser(response.username);
       index(response.username, allStocks);
+      console.log(portfolios.forEach((item, index) => getTrending(item)))
     });
     //index(currentUser, allStocks);
   }, []);

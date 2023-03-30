@@ -132,3 +132,36 @@ export var index = function (username, callback) {
   }
   $.ajax(request);
 }
+
+export var getTrending = function (aSymbol) {
+  const trendingArr = [];
+  const encodedParams = new URLSearchParams();
+  encodedParams.append("symbol", aSymbol);
+  setSymbol(aSymbol);
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': process.env.X_RapidAPI_Key,
+      'X-RapidAPI-Host': 'yahoo-finance97.p.rapidapi.com'
+    },
+    body: encodedParams
+  };
+
+  const fetchData = async() => {
+    try {
+      const response = await fetch('https://yahoo-finance97.p.rapidapi.com/simple-info', options);
+      const json = await response.json();
+      console.log(json.data);
+      json.data ["symbol"] = aSymbol
+      json.data ["uniqueId"] = incrementId(id + 1)
+      trendingArr => [...trendingArr, json.data];
+
+    } catch (error) {
+        console.log("error", error);
+    }
+  };
+  fetchData();
+  return trendingArr
+}

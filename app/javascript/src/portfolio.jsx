@@ -17,6 +17,7 @@ const Portfolio = () => {
   const [responseStatus, setResponseStatus] = useState(false)
   const [portfolios, setPortfolio] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
+  const [currentPrices, setCurrentPrices] = useState([]);
 
   const allStocks = function (response) {
     setPortfolio(response.symbols.map(symbol => symbol));
@@ -60,7 +61,6 @@ const Portfolio = () => {
         if (json.status == 200) {
           console.log("tis 200");
           setResponseStatus(true)
-
         }
 
         console.log(json.data)
@@ -109,7 +109,8 @@ const Portfolio = () => {
       console.log(response.username)
       //setCurrentUser(response.username);
       index(response.username, allStocks);
-      console.log(portfolios.forEach((item, index) => getTrending(item)))
+      //portfolios.forEach((item, index) => getTrending(item))
+      console.log(getTrending('aapl'))
     });
     //index(currentUser, allStocks);
   }, []);

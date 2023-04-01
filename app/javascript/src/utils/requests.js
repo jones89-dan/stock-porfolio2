@@ -137,7 +137,7 @@ export var getTrending = function (aSymbol) {
   const trendingArr = [];
   const encodedParams = new URLSearchParams();
   encodedParams.append("symbol", aSymbol);
-  setSymbol(aSymbol);
+  //setSymbol(aSymbol);
 
   const options = {
     method: 'POST',
@@ -154,14 +154,13 @@ export var getTrending = function (aSymbol) {
       const response = await fetch('https://yahoo-finance97.p.rapidapi.com/simple-info', options);
       const json = await response.json();
       console.log(json.data);
-      json.data ["symbol"] = aSymbol
-      json.data ["uniqueId"] = incrementId(id + 1)
-      trendingArr => [...trendingArr, json.data];
-
+      return json;
+      
     } catch (error) {
         console.log("error", error);
     }
+
   };
   fetchData();
-  return trendingArr
+
 }

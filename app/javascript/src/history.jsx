@@ -29,7 +29,7 @@ const History = () => {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
 
-    const formattedDate = yyyy + '-' + mm + '-' + (dd - 1);
+    const formattedDate = yyyy + '-' + mm + '-' + (dd);
     return formattedDate;
   }
 
@@ -53,6 +53,8 @@ const History = () => {
     const historyArr = [];
     const colorArr = [];
     const dateArr = [];
+    const dailyArr = [];
+
     const encodedParams = new URLSearchParams();
     encodedParams.append("end", endDateVar);
     encodedParams.append("symbol", querySybmol);
@@ -88,6 +90,8 @@ const History = () => {
           } else {
             colorArr.push('rgba(0,128,0,1)');
           }
+
+          dailyArr.push(json.data[i].Open.toFixed(2) - json.data[i].Close.toFixed(2))
         }
 
       } catch (error) {
@@ -130,6 +134,7 @@ const History = () => {
               plugins: {
                 legend: {
                   display: false,
+                  fontsize: 0,
                 }}
           }
       });
